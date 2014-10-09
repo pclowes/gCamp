@@ -1,11 +1,59 @@
-w00t - this is for the gCamp project
+<%= stylesheet_link_tag 'application' %>
+  <body>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div style="color:white" class="jumbotron">
+      <h1><center>gCamp</center></h1>
+          <p><center style="font-size:16">Your life, organized</center></p>
+    </div>
 
-and now we are going to try actual HTML but convert it to HAML
+    <div class="container">
+      <!-- Example row of columns -->
+      <div style="background-color: rgba(0,0,0,.5)"class="row">
 
-so HTML would look like:
-<P> This is an HTML paragraph </p>
-  <ul>With an unordered list</ul>
-    <li>list item 1</li>
-    <li>list item 2</li>
+        <div class="col-md-4" id="panel">
+          <%= image_tag("mountain1.jpg", class: "img-responsive")%>
+          <p></p>
+            <div class ="panel panel-info" hspace="20">
+              <div class="panel-heading">
+                <h3 class="panel-title">Tasks</h3>
+              </div>
+              <div class = "panel-content">
+                <p>Grouped by projects and lists, just the way you like'em!</p>
+              </div>
+            </div>
+        </div>
 
-but in HAML it would look like:
+        <div class="col-md-4" id="panel">
+          <%= image_tag("mountain2.jpg", class: "img-responsive")%>
+          <p></p>
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Documents</h3>
+              </div>
+              <div class="panel-content">
+                <p>
+                  <li>Upload</li>
+                  <li>Comment</li>
+                  <li>Revise</li>
+                </p>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" id="panel">
+          <%= image_tag("mountain3.jpg", class: "img-responsive")%>
+          <p></p>
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Comments </h3>
+              </div>
+              <div class="panel-content">
+                <p>
+                  <li>Comment on tasks and documents</li>
+                  <li>Get email notifications</li>
+                <p>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>

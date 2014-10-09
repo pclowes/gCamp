@@ -1,5 +1,19 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+.jumbotron {
+  background: rgba(0, 0, 0, 0.0);
+}
+
+body {
+  background-image: image-url("mainbackground.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#panel {
+  color: black;
+  background: rgba(0, 0, 0, 0.0);
+}
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
