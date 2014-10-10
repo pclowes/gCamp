@@ -15,12 +15,12 @@
           <% end %>
     </div>
 </div>
-
+<br></br>
 <div class="container">
   <div class="row">
     <% @columns.each do |headers, contents| %>
       <div class="col-md-4">
-        <div class="panel panel-info" hspace="20">
+        <div class="panel panel-info">
           <div class="panel-heading">
             <h3 class="panel-title">
               <%= headers %>
@@ -28,7 +28,7 @@
           </div>
         <% contents.each do |content| %>
         <div class="panel-content">
-          <%= content %>
+          <ul><li><%= content %></li></ul>
         </div>
         <% end %>
         </div>
