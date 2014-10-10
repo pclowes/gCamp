@@ -6,54 +6,25 @@
           <p><center style="font-size:16">Your life, organized</center></p>
     </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div style="background-color: rgba(0,0,0,.5)"class="row">
 
-        <div class="col-md-4" id="panel">
-          <%= image_tag("mountain1.jpg", class: "img-responsive")%>
-          <p></p>
-            <div class ="panel panel-info" hspace="20">
-              <div class="panel-heading">
-                <h3 class="panel-title">Tasks</h3>
-              </div>
-              <div class = "panel-content">
-                <p>Grouped by projects and lists, just the way you like'em!</p>
-              </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <% @images.each do |display| %>
+        <%= image_tag(display, class: "img-responsive")%>
+      <% end %>
+      <div class="panel panel-info" hspace="20">
+        <% @columns.each do |headers, contents| %>
+          <div class="panel-heading">
+            <h3 class="panel-title"> <%= headers %> </h3>
+          </div>
+          <% contents.each do |content| %>
+            <div class="panel-content">
+                <%= content %>
             </div>
-        </div>
-
-        <div class="col-md-4" id="panel">
-          <%= image_tag("mountain2.jpg", class: "img-responsive")%>
-          <p></p>
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                <h3 class="panel-title">Documents</h3>
-              </div>
-              <div class="panel-content">
-                <p>
-                  <li>Upload</li>
-                  <li>Comment</li>
-                  <li>Revise</li>
-                </p>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-md-4" id="panel">
-          <%= image_tag("mountain3.jpg", class: "img-responsive")%>
-          <p></p>
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                <h3 class="panel-title">Comments </h3>
-              </div>
-              <div class="panel-content">
-                <p>
-                  <li>Comment on tasks and documents</li>
-                  <li>Get email notifications</li>
-                <p>
-              </div>
-            </div>
-        </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
+  </div>
+</div>
