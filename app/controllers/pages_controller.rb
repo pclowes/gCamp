@@ -5,5 +5,6 @@ class PagesController < ApplicationController
                 Documents:['Upload','Comment','Revise'],
                 Comments:['Comment on task and documents','Get email notifications']
                 }
+    render :index
     end
 end
