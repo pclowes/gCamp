@@ -6,25 +6,33 @@
           <p><center style="font-size:16">Your life, organized</center></p>
     </div>
 
+<div class="container">
+  <div class="row">
+    <% @images.each do |display| %>
+      <div class="col-md-4">
+          <%= image_tag(display, class: "img-responsive")%>
+      </div>
+          <% end %>
+    </div>
+</div>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <% @images.each do |display| %>
-        <%= image_tag(display, class: "img-responsive")%>
-      <% end %>
-      <div class="panel panel-info" hspace="20">
-        <% @columns.each do |headers, contents| %>
+    <% @columns.each do |headers, contents| %>
+      <div class="col-md-4">
+        <div class="panel panel-info" hspace="20">
           <div class="panel-heading">
-            <h3 class="panel-title"> <%= headers %> </h3>
+            <h3 class="panel-title">
+              <%= headers %>
+            </h3>
           </div>
-          <% contents.each do |content| %>
-            <div class="panel-content">
-                <%= content %>
-            </div>
-          <% end %>
+        <% contents.each do |content| %>
+        <div class="panel-content">
+          <%= content %>
+        </div>
         <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
