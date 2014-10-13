@@ -4,7 +4,7 @@
   background: rgba(0, 0, 0, 0.0);
 }
 
-body {
+.homepage {
   background-image: image-url("mainbackground.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
@@ -13,6 +13,10 @@ body {
 #panel {
   color: black;
   background: rgba(0, 0, 0, 0.0);
+}
+
+.nav {
+  padding: 15px
 }
 
 /*

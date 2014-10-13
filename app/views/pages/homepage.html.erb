@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <%= stylesheet_link_tag 'application' %>
+  </head>
+  <body class="homepage">
+    <div class="jumbotron" style="color:white">
+      <h1>
+        <center>gCamp</center>
+      </h1>
+      <p>
+        <center style="font-size:16">Your life, organized</center>
+      </p>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <% @images.each do |display| %>
+          <div class="col-md-4">
+            <%= image_tag(display, class: "img-responsive") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <br/>
+    <div class="container">
+      <div class="row">
+        <% @columns.each do |headers, contents| %>
+          <div class="col-md-4">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <%= headers %>
+                </h3>
+              </div>
+              <% contents.each do |content| %>
+                <div class="panel-content">
+                  <ul>
+                    <li>
+                      <%= content %>
+                    </li>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>
