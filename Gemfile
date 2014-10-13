@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 group :production do
     gem "pg"
     gem "rails_12factor"
+    gem "i18n"
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
