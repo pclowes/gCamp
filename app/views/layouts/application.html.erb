@@ -12,8 +12,8 @@
       <div class="row">
         <h5 display: "inline-block">
           <div class="fixed-footer myfooter">
-            <%= link_to I18n.t :about, about_path %> |
-            <%= link_to I18n.t :terms, terms_path %>
+            <%= link_to (I18n.t :about), about_path, {:class => ("active" if current_page?('/about'))}%> |
+            <%= link_to (I18n.t :terms), terms_path, {:class => ("active" if current_page?('/terms'))}%>
           </div>
         </h5>
      </div>

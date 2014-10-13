@@ -23,8 +23,13 @@
   padding-top: 15px;
   padding-bottom: 15px;
   border-top: 1px solid white
-
 }
+
+a.active {
+  color: #ababab;
+  pointer-events: none;
+  cursor: default;
+ }
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
