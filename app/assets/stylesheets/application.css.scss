@@ -6,7 +6,7 @@
 
 .homepage {
   background-image: image-url("mainbackground.jpg");
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: 100%;
 }
 
@@ -30,6 +30,10 @@ a.active {
   pointer-events: none;
   cursor: default;
  }
+
+.quote {
+  color: white;
+}
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
