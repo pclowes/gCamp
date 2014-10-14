@@ -5,15 +5,17 @@
   <body>
     <%= yield %>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <%= link_to "gCamp", homepage_path, class: "navbar-brand"  %>
+      <div class="container">
+        <%= link_to "gCamp", homepage_path, class: "navbar-brand"  %>
+      </div>
     </div>
 
-    <footer class="container">
+    <footer>
       <div class="row">
         <h5 display: "inline-block">
-          <div class="fixed-footer myfooter">
-            <%= link_to (I18n.t :about), about_path, {:class => ("active" if current_page?('/about'))}%> |
-            <%= link_to (I18n.t :terms), terms_path, {:class => ("active" if current_page?('/terms'))}%>
+          <div class="fixed-footer myfooter container">
+            <%= link_to t(:about), about_path, {:class => ("active" if current_page?('/about'))}%> |
+            <%= link_to t(:terms), terms_path, {:class => ("active" if current_page?('/terms'))}%>
           </div>
         </h5>
       </div>
