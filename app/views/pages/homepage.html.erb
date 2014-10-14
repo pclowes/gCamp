@@ -48,7 +48,9 @@
     </div>
     <div class="container">
       <% @quotes.each do |quote| %>
-        <p class="quote"><%= quote %><p>
+        <p class="quote">"<%= quote[0] %>"</p>
+        <p class="author" style="italic"> - <%= quote[1] %></p>
+
       <% end %>
     </div>
   </body>
