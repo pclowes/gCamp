@@ -6,8 +6,8 @@ class PagesController < ApplicationController
                 Comments:['Comment on task and documents','Get email notifications']
                 }
     @quotes = [
-              ['Vini Vidi Vici.','Ceasar'],
-              ['The point of war is not to die for your country, it is to make the other son of a bitch die for his.','Patton'],
+              ['Always do more than is required of you.','Patton'],
+              ['He who fears being conquered is sure of defeat.','Bonaparte'],
               ['Age wrinkles the body. Quitting wrinkles the soul.','MacArthur']
               ]
     render :homepage

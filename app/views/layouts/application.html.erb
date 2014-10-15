@@ -10,15 +10,12 @@
       </div>
     </div>
 
-    <footer>
-      <div class="row">
-        <h5 display: "inline-block">
-          <div class="fixed-footer myfooter container">
-            <%= link_to t(:about), about_path, {:class => ("active disabled" if current_page?('/about'))}%> |
-            <%= link_to t(:terms), terms_path, {:class => ("active disabled" if current_page?('/terms'))}%>
-          </div>
-        </h5>
+    <div class="footer navbar-fixed-bottom">
+      <div class="container">
+        <%= link_to t(:home), homepage_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
+        <%= link_to t(:about), about_path, {:class => ("active disabled" if current_page?('/about'))}%> |
+        <%= link_to t(:terms), terms_path, {:class => ("active disabled" if current_page?('/terms'))}%>
       </div>
-    </footer>
+    </div>
   </body>
 </html>

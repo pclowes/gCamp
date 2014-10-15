@@ -30,7 +30,7 @@
             </div>
               <div class="panel-content">
                 <% contents.each do |content| %>
-                  <% if content==contents[0] %>
+                  <% if contents.length <= 1 %>
                     <ul>
                       <li class="list-unstyled">
                         <%= contents[0] %>
@@ -50,7 +50,7 @@
       <% end %>
     </div>
   </div>
-  <div class="container">
+  <div class="container quotes">
     <% @quotes.each do |quote| %>
       <p class="quote">"<%= quote[0] %>"</p>
       <p class="author" style="italic"> - <%= quote[1] %></p>

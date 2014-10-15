@@ -19,30 +19,29 @@
   padding: 15px
 }
 
-.myfooter{
+.footer{
   padding-top: 15px;
   padding-bottom: 15px;
-  border-top: 1px solid black;
+  border-top: 1px gray;
+  background: #222222;
 }
 
 a.active {
   color: #ababab;
   pointer-events: none;
   cursor: default;
+  font-weight: bold;
  }
 
-.quote {
+.quotes {
   color: white;
+  padding-bottom: 80px
 }
 
 .author {
   font-style: italic;
   color: #DCDCDC;
   text-indent: 15px
-}
-
-.nobullet {
-  list-style:none;
 }
 
 /*
