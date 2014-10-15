@@ -28,15 +28,23 @@
                 <%= headers %>
               </h3>
             </div>
-            <% contents.each do |content| %>
               <div class="panel-content">
-                <ul>
-                  <li style>
-                    <%= content %>
-                  </li>
-                </ul>
+                <% if contents.length <= 1 %>
+                  <ul>
+                    <li class="list-unstyled">
+                      <%= contents[0] %>
+                    </li>
+                  </ul>
+                <% else %>
+                  <% contents.each do |content| %>
+                    <ul>
+                      <li>
+                        <%= content %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
               </div>
-            <% end %>
           </div>
         </div>
       <% end %>
