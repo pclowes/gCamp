@@ -29,14 +29,14 @@
               </h3>
             </div>
               <div class="panel-content">
-                <% if contents.length <= 1 %>
-                  <ul>
-                    <li class="list-unstyled">
-                      <%= contents[0] %>
-                    </li>
-                  </ul>
-                <% else %>
-                  <% contents.each do |content| %>
+                <% contents.each do |content| %>
+                  <% if content==contents[0] %>
+                    <ul>
+                      <li class="list-unstyled">
+                        <%= contents[0] %>
+                      </li>
+                    </ul>
+                  <% else %>
                     <ul>
                       <li>
                         <%= content %>
