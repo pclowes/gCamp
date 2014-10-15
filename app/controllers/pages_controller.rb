@@ -7,22 +7,16 @@ class PagesController < ApplicationController
                 }
 
 
-    @patton = Quote.new
-    @patton.quote = "Always do more than is required of you."
-    @patton.author = "Patton"
+    patton = Quote.new("Always do more than is required of you.","Patton")
 
-    @bonaparte = Quote.new
-    @bonaparte.quote = "He who fears being conquered is sure of defeat."
-    @bonaparte.author = "Bonaparte"
+    bonaparte = Quote.new("He who fears being conquered is sure of defeat.","Bonaparte")
 
-    @macarthur = Quote.new
-    @macarthur.quote = "Age wrinkles the body. Quitting wrinkles the soul."
-    @macarthur.author = "MacArthur"
+    macarthur = Quote.new("Age wrinkles the body. Quitting wrinkles the soul.","MacArthur")
 
     @quotes = [
-              @patton,
-              @bonaparte,
-              @macarthur
+              patton,
+              bonaparte,
+              macarthur
               ]
 
     render :homepage

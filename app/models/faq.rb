@@ -1,5 +1,5 @@
 class Faq
-  attr_accessor :question, :answer
+  attr_reader :question, :answer
   def initialize(question, answer)
     @question = question
     @answer = answer
