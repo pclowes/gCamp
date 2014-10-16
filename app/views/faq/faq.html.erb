@@ -1,9 +1,20 @@
+<a name="top"></a>
 <div class="jumbotron">
   <div class="container">
     <h2>Frequently Asked Questions</h2>
     <% @faqs.each do |faq| %>
-      <h4><%= faq.question %></h4>
-      <p><%= faq.answer %></p>
+      <ul>
+        <a href=#faq.question><li><%= faq.question %></li></a>
+      </ul>
     <% end %>
+    <br></br>
+    <% @faqs.each do |faq| %>
+      <a name="faq.question"></a>
+      <h4><%= faq.question %></h4>
+        <p><%= faq.answer %></p>
+      <div class="faqend">
+        <a href=#top>Top</a>
+      </div>
+    <a><% end %></a
   </div>
 </div>
