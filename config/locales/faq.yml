@@ -1,7 +1,0 @@
-!ruby/object:Faq
-question: John Doe
-answer: jdoe
-
-!ruby/object:Faq
-question: Jane Doe
-answer: jdoe
