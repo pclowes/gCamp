@@ -2,14 +2,16 @@
 <div class="jumbotron">
   <div class="container">
     <h2>Frequently Asked Questions</h2>
-    <% @faqs.each do |faq| %>
-      <ul>
-        <a href=#faq.question><li><%= faq.question %></li></a>
-      </ul>
+    <% Faq.all.each do |faq| %>
+      <a href="#<% faq.question %>">
+        <ul>
+            <li><%= faq.question %></li>
+        </ul>
+      </a>
     <% end %>
     <br></br>
-    <% @faqs.each do |faq| %>
-      <a name="faq.question"></a>
+    <% Faq.all.each do |faq| %>
+      <a name="<%= faq.question %>"></a>
       <h4><%= faq.question %></h4>
         <p><%= faq.answer %></p>
       <div class="faqend">
