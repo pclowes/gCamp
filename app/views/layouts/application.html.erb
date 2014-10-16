@@ -2,14 +2,17 @@
   <head>
     <%= stylesheet_link_tag 'application' %>
   </head>
-  <body class = "container">
+  <body class="<%='homepage' if current_page?'/homepage'%>">
     <div class="navbar navbar-inverse" role="navigation">
-      <div>
+      <div class="container">
         <%= link_to "gCamp", homepage_path, class: "navbar-brand"  %>
       </div>
     </div>
-<%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
     <div class="footer">
+      <div class="container">
         <%= link_to t(:home), homepage_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
         <%= link_to t(:about), about_path, {:class => ("active disabled" if current_page?('/about'))}%> |
         <%= link_to t(:terms), terms_path, {:class => ("active disabled" if current_page?('/terms'))}%> |

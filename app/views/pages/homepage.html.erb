@@ -1,59 +1,58 @@
-<div class="homepage">
-  <div class="jumbotron" style="color:white">
-    <h1>
-      <center>gCamp</center>
-    </h1>
-    <p>
-      <center style="font-size:16">Your life, organized</center>
-    </p>
-  </div>
 
-  <div>
-    <div class="row">
-      <% @images.each do |display| %>
-        <div class="col-md-4">
-          <%= image_tag(display, class: "img-responsive") %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  <br/>
-  <div>
-    <div class="row">
-      <% @columns.each do |headers, contents| %>
-        <div class="col-md-4">
-          <div class="panel">
-            <div class="panel-heading">
-              <h3 class="panel-title">
-                <%= headers %>
-              </h3>
-            </div>
-              <div class="panel-content">
-                <% contents.each do |content| %>
-                  <% if contents.length <= 1 %>
-                    <ul>
-                      <li class="list-unstyled">
-                        <%= contents[0] %>
-                      </li>
-                    </ul>
-                  <% else %>
-                    <ul>
-                      <li>
-                        <%= content %>
-                      </li>
-                    </ul>
-                  <% end %>
-                <% end %>
-              </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="quotes">
-    <% @quotes.each do |quote| %>
-      <p class="quote">"<%= quote.quote %>"</p>
-      <p class="author" style="italic"> - <%= quote.author %></p>
+<div class="jumbotron" style="color:white">
+  <h1>
+    <center>gCamp</center>
+  </h1>
+  <p>
+    <center style="font-size:16">Your life, organized</center>
+  </p>
+</div>
+
+<div>
+  <div class="row">
+    <% @images.each do |display| %>
+      <div class="col-md-4">
+        <%= image_tag(display, class: "img-responsive") %>
+      </div>
     <% end %>
   </div>
+</div>
+<br/>
+<div>
+  <div class="row">
+    <% @columns.each do |headers, contents| %>
+      <div class="col-md-4">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <%= headers %>
+            </h3>
+          </div>
+            <div class="panel-content">
+              <% contents.each do |content| %>
+                <% if contents.length <= 1 %>
+                  <ul>
+                    <li class="list-unstyled">
+                      <%= contents[0] %>
+                    </li>
+                  </ul>
+                <% else %>
+                  <ul>
+                    <li>
+                      <%= content %>
+                    </li>
+                  </ul>
+                <% end %>
+              <% end %>
+            </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="quotes">
+  <% @quotes.each do |quote| %>
+    <p class="quote">"<%= quote.quote %>"</p>
+    <p class="author" style="italic"> - <%= quote.author %></p>
+  <% end %>
 </div>
