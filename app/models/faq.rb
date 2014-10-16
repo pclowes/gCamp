@@ -5,6 +5,9 @@ class Faq
   end
 
   attr_reader :question, :answer
+  def slug
+    question.downcase.gsub(/\W+/, '')
+  end
 
   def slug
     question.downcase.gsub(/\W+/, '')

@@ -8,6 +8,7 @@ class FaqController < ApplicationController
   alternatives = Faq.new("What are the alternatives?","The alternatives are simple. You can live your life in an unorganized mess. Wake up not knowing what to do that day, not knowing where your documents are, and having no idea what comments you've made about those tasks or documents. Or you can check out gCam and organize those documents, tasks, and comments.")
 
   @faqs=Faq.all
+
   render :faq
   Faq.all.clear
   end
