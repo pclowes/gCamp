@@ -8,7 +8,7 @@
     </p>
   </div>
 
-  <div class="container">
+  <div>
     <div class="row">
       <% @images.each do |display| %>
         <div class="col-md-4">
@@ -18,7 +18,7 @@
     </div>
   </div>
   <br/>
-  <div class="container">
+  <div>
     <div class="row">
       <% @columns.each do |headers, contents| %>
         <div class="col-md-4">
@@ -50,7 +50,7 @@
       <% end %>
     </div>
   </div>
-  <div class="container quotes">
+  <div class="quotes">
     <% @quotes.each do |quote| %>
       <p class="quote">"<%= quote.quote %>"</p>
       <p class="author" style="italic"> - <%= quote.author %></p>
