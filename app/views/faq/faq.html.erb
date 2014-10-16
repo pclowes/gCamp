@@ -1,22 +1,20 @@
 <a name="top"></a>
-<div class="jumbotron">
-  <div class="container">
-    <h2>Frequently Asked Questions</h2>
-    <% @faqs.each do |faq| %>
-      <a href=#<%= faq.slug %>>
-        <ul>
-            <li><%= faq.question %></li>
-        </ul>
-      </a>
-    <% end %>
-    <br></br>
-    <% Faq.all.each do |faq| %>
-      <a name="<%= faq.slug %>"></a>
-      <h4><%= faq.question %></h4>
-        <p><%= faq.answer %></p>
-      <div class="faqend">
-        <a href=#top>Top</a>
-      </div>
-    <a><% end %></a
-  </div>
+<div class="container">
+  <h2>Frequently Asked Questions</h2>
+  <% @faqs.each do |faq| %>
+    <a href=#<%= faq.slug %>>
+      <ul>
+          <li><%= faq.question %></li>
+      </ul>
+    </a>
+  <% end %>
+  <br></br>
+  <% Faq.all.each do |faq| %>
+    <a name="<%= faq.slug %>"></a>
+    <h4><%= faq.question %></h4>
+      <p><%= faq.answer %></p>
+    <div class="faqend">
+      <a href=#top>Top</a>
+    </div>
+  <a><% end %></a
 </div>
