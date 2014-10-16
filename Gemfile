@@ -1,9 +1,12 @@
 source 'https://rubygems.org'
+
 group :production do
     gem "pg"
     gem "rails_12factor"
-    gem "i18n"
 end
+
+# Internationalize all the things
+gem "i18n"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'

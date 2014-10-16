@@ -12,9 +12,10 @@
 <%= yield %>
     <div class="footer navbar-fixed-bottom">
       <div class="container">
-        <%= link_to :Home, homepage_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
+        <%= link_to t(:Home), homepage_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
         <%= link_to :About, about_path, {:class => ("active disabled" if current_page?('/about'))}%> |
         <%= link_to :Terms, terms_path, {:class => ("active disabled" if current_page?('/terms'))}%> |
+        <%= link_to :Tasks, tasks_path, {:class => ("active disabled" if current_page?('/tasks'))}%> |
         <%= link_to :FAQ, faq_path, {:class => ("active disabled" if current_page?('/faq'))}%>
       </div>
     </div>
