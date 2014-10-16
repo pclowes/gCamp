@@ -7,7 +7,7 @@ class FaqController < ApplicationController
   scared = Faq.new("I'm scared, is it going to be too hard?","This is a funny question we get a lot. It's not going to be ahrd. Your life will be different. That's right, gCamp is going to change your life. You wil wake up and no longer wonder what your tasks for the day are. You will have one place to check the lists of tasks that you have given yourself and the tasks those lists contain. Your documents will no longer be splayed across your bedroom like a child. You will have access to a central palce where those documents will be organized. That'll be gCamp!")
   alternatives = Faq.new("What are the alternatives?","The alternatives are simple. You can live your life in an unorganized mess. Wake up not knowing what to do that day, not knowing where your documents are, and having no idea what comments you've made about those tasks or documents. Or you can check out gCam and organize those documents, tasks, and comments.")
 
-
+  @faqs=Faq.all
   render :faq
   Faq.all.clear
   end

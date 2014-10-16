@@ -2,8 +2,8 @@
 <div class="jumbotron">
   <div class="container">
     <h2>Frequently Asked Questions</h2>
-    <% Faq.all.each do |faq| %>
-      <a href="#<% faq.question %>">
+    <% @faqs.each do |faq| %>
+      <a href=#<%= faq.question.downcase.gsub(/\W+/, '') %>>
         <ul>
             <li><%= faq.question %></li>
         </ul>
@@ -11,7 +11,7 @@
     <% end %>
     <br></br>
     <% Faq.all.each do |faq| %>
-      <a name="<%= faq.question %>"></a>
+      <a name="<%= faq.question.downcase.gsub(/\W+/, '') %>"></a>
       <h4><%= faq.question %></h4>
         <p><%= faq.answer %></p>
       <div class="faqend">
