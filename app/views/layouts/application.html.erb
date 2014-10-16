@@ -10,13 +10,12 @@
       </div>
     </div>
 
-
     <div class="footer navbar-fixed-bottom">
       <div class="container">
-        <%= link_to 'home', homepage_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
-        <%= link_to 'about', about_path, {:class => ("active disabled" if current_page?('/about'))}%> |
-        <%= link_to 'terms', terms_path, {:class => ("active disabled" if current_page?('/terms'))}%> |
-        <%= link_to 'faq', faq_path, {:class => ("active disabled" if current_page?('/faq'))}%>
+        <%= link_to :Home, homepage_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
+        <%= link_to :About, about_path, {:class => ("active disabled" if current_page?('/about'))}%> |
+        <%= link_to :Terms, terms_path, {:class => ("active disabled" if current_page?('/terms'))}%> |
+        <%= link_to :FAQ, faq_path, {:class => ("active disabled" if current_page?('/faq'))}%>
       </div>
     </div>
   </body>
