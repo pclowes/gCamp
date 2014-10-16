@@ -5,6 +5,9 @@ class Faq
   end
 
   attr_reader :question, :answer
+  def slug
+    question.downcase.gsub(/\W+/, '')
+  end
 
   def initialize(question=nil, answer=nil)
     @question = question

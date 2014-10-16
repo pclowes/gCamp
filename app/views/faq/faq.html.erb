@@ -1,9 +1,10 @@
+<div class="ugg">
 <a name="top"></a>
 <div class="jumbotron">
   <div class="container">
     <h2>Frequently Asked Questions</h2>
     <% @faqs.each do |faq| %>
-      <a href=#<%= faq.question.downcase.gsub(/\W+/, '') %>>
+      <a href=#<%= faq.slug %>>
         <ul>
             <li><%= faq.question %></li>
         </ul>
@@ -11,7 +12,7 @@
     <% end %>
     <br></br>
     <% Faq.all.each do |faq| %>
-      <a name="<%= faq.question.downcase.gsub(/\W+/, '') %>"></a>
+      <a name="<%= faq.slug %>"></a>
       <h4><%= faq.question %></h4>
         <p><%= faq.answer %></p>
       <div class="faqend">
@@ -19,4 +20,5 @@
       </div>
     <a><% end %></a
   </div>
+</div>
 </div>
