@@ -9,14 +9,9 @@ class Faq
     question.downcase.gsub(/\W+/, '')
   end
 
-  def slug
-    question.downcase.gsub(/\W+/, '')
-  end
-  
-  def initialize(question=nil, answer=nil)
+  def initialize(question, answer)
     @question = question
     @answer = answer
     @@allfaq << self
   end
-
 end
