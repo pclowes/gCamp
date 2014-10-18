@@ -9,7 +9,7 @@
     </a>
   <% end %>
   <br></br>
-  <% Faq.all.each do |faq| %>
+  <% Faq.all.sort.each do |faq| %>
     <a name="<%= faq.slug %>"></a>
     <h4><%= faq.question %></h4>
       <p><%= faq.answer %></p>
