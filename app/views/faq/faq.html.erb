@@ -1,7 +1,7 @@
 <div>
   <a name="top"></a>
   <h2>Frequently Asked Questions</h2>
-  <% @faqs.each do |faq| %>
+  <% Faq.all.each do |faq| %>
     <a href=#<%= faq.slug %>>
       <ul>
           <li><%= faq.question %></li>
@@ -17,6 +17,4 @@
       <a href=#top>Top</a>
     </div>
   <% end %>
-  <%= CONFIG[:what][:question] %>
-  <%= CONFIG[:what][:answer] %>
 </div>
