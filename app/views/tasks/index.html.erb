@@ -11,10 +11,11 @@
   </thead>
   <tbody>
     <% @tasks.each do |task| %>
-      <tr>
-        <td>
-          <%= task.description %>
-        </td>
+      <%= form_for(task, html: {class: "form-horizontal"}) do |f| %>
+        <tr>
+          <td>
+            <%= task.description %>
+          </td>
           <td>
             <%= link_to 'Show', task, class: "btn btn-primary pull-right"  %>
           </td>
@@ -24,7 +25,12 @@
           <td>
             <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning pull-right" %>
           </td>
-      </tr>
+          <td>
+              <input name="task[complete]" type="submit" value="" class="btn btn-primary glyphicon-check">
+              <!-- <input id="task_complete" type="checkbox"> -->
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
