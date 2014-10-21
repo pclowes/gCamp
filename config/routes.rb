@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :tasks
 
   root "pages#homepage"
-  get '/homepage' => "pages#homepage", as: :homepage
   get '/about' => "about#about", as: :about
   get '/terms' => "terms#terms", as: :terms
   get '/faq' => "faq#faq", as: :faq
