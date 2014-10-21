@@ -1,6 +1,7 @@
 <html>
   <head>
     <%= stylesheet_link_tag 'application' %>
+    <%= csrf_meta_tags %>
   </head>
   <body class="<%='homepage' if current_page?'/'%>">
     <div class="navbar navbar-inverse" role="navigation">
@@ -20,5 +21,7 @@
         <%= link_to t(:faq), faq_path, {:class => ("active disabled" if current_page?('/faq'))}%>
       </div>
     </div>
+    <%= javascript_include_tag 'application' %>
+
   </body>
 </html>
