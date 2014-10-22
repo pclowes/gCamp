@@ -26,3 +26,9 @@ en:
   about: "About"
   home: "Home"
   faq: "FAQ"
+  date:
+    formats:
+      default: "%m/%d/%Y"
+  time:
+    formats:
+      default: "%m/%d/%Y %H:%M"

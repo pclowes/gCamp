@@ -7,8 +7,11 @@
   <%= @task.description %>
 </p>
 <p>
+  <strong>Completed:</strong>
+  <%= @task.complete %>
+<p>
   <strong>Due Date:</strong>
-  <%= @task.due_date %>
+  <%= I18n.l @task.due_date %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
