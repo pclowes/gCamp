@@ -21,12 +21,7 @@
           <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning pull-right" %>
         </td>
         <td>
-          <%= form_for(task, html: {class: "form-horizontal"}) do |f| %>
-            <button name="task[complete]" type="submit" value="1" class=>
-              <i class="btn btn-primaryglyphicon glyphicon-check"></i>
-            </button>
-            <!-- <input id="task_complete" type="checkbox"> -->
-          <% end %>
+          <i name="task[complete]" type="submit" value="1" class="btn btn-primary glyphicon glyphicon-check"></i>
         </td>
       </tr>
     <% end %>
