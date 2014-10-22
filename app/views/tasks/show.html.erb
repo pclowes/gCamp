@@ -11,7 +11,7 @@
   <%= @task.complete %>
 <p>
   <strong>Due Date:</strong>
-  <%= l @task.due_date %>
+  <%= l @task.due_date if @task.due_date %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
