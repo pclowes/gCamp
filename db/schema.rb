@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20141020214220) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "complete"
-    t.date     "Due_date"
+    t.date     "due_date"
   end
 
 end
