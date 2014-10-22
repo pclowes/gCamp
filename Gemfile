@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 group :production do
   gem "rails_12factor"
-  gem "i18n"
 end
 
 gem "pg"

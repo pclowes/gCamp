@@ -20,9 +20,8 @@
           <%= task.complete %>
         </td>
         <td>
-          <%= task.due_date %>
+          <%= l task.due_date if task.due_date %>
         </td>
-
         <td>
           <div class= "btn-toolbar pull-right">
             <%= link_to 'Show', task, class: "btn btn-primary"  %>
