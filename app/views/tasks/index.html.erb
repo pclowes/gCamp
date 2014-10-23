@@ -2,16 +2,16 @@
   <span class="h1">Tasks</span>
   <%= link_to 'Create Task', new_task_path, class: "btn btn-info pull-right" %>
   <div class="btn pull-right">
-    <%= link_to "All", tasks_path(task_filter: "All"), {:class => ("active disabled" if current_page?('/tasks?task_filter=All'))}%>|
-    <%= link_to "Incomplete", tasks_path(task_filter: "Incomplete"), {:class => ("active disabled" unless current_page?('/tasks?task_filter=All'))}%>
+    <%= link_to "All", tasks_path(task_filter: "all", sort_by: params[:sort_by]), {:class => ("active disabled" if params[:task_filter]=="all")}%>|
+    <%= link_to "Incomplete", tasks_path(task_filter: "incomplete", sort_by: params[:sort_by]), {:class => ("active disabled" unless params[:task_filter]=="all")}%>
   </div>
 </div>
 <table class="table">
   <thead class="row-md-3">
     <tr>
-      <th><%= link_to 'Description', tasks_path(sort_by: "description") %></th>
-      <th><%= link_to 'Complete', tasks_path(sort_by: "complete") %></th>
-      <th><%= link_to 'Due Date', tasks_path(sort_by: "due_date") %></th>
+      <th><%= link_to 'Description', tasks_path(task_filter: params[:task_filter], sort_by: "description") %></th>
+      <th><%= link_to 'Complete', tasks_path(task_filter: params[:task_filter], sort_by: "complete") %></th>
+      <th><%= link_to 'Due Date', tasks_path(task_filter: params[:task_filter], sort_by: "due_date") %></th>
     </tr>
   </thead>
   <tbody>
