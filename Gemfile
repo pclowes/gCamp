@@ -4,6 +4,8 @@ group :production do
   gem "rails_12factor"
 end
 
+gem "kaminari"
+
 gem "pg"
 # Internationalize all the things
 gem "i18n"

@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <% @tasks.each do |task| %>
-      <tr>
+      <tr <% {:class => ("alert alert-danger")} %>>
         <td><%= task.description %></td>
         <td><%= task.complete %></td>
         <td><%= l task.due_date if task.due_date %></td>
