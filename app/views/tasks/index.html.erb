@@ -1,6 +1,11 @@
-<h1 class="page-header">Listing tasks
-    <%= link_to 'Create Task', new_task_path, class: "btn btn-info pull-right" %>
-</h1>
+<div class="page-header">
+  <span class="h1">Tasks</span>
+  <%= link_to 'Create Task', new_task_path, class: "btn btn-info pull-right" %>
+  <div class="btn pull-right">
+    <%= link_to "All", tasks_path(task_sort: "All"), {:class => ("active disabled" if current_page?('/tasks?task_sort=All'))}%> |
+    <%= link_to "Incomplete", tasks_path(task_sort: "Incomplete"), {:class => ("active disabled" unless current_page?('/tasks?task_sort=All'))} %>
+  </div>
+</div>
 <table class="table">
   <thead class="row-md-3">
     <tr>
