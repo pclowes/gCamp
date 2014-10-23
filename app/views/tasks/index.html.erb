@@ -2,16 +2,16 @@
   <span class="h1">Tasks</span>
   <%= link_to 'Create Task', new_task_path, class: "btn btn-info pull-right" %>
   <div class="btn pull-right">
-    <%= link_to "All", tasks_path(task_sort: "All"), {:class => ("active disabled" if current_page?('/tasks?task_sort=All'))}%> |
-    <%= link_to "Incomplete", tasks_path(task_sort: "Incomplete"), {:class => ("active disabled" unless current_page?('/tasks?task_sort=All'))} %>
+    <%= link_to "All", tasks_path(task_filter: "All"), {:class => ("active disabled" if current_page?('/tasks?task_filter=All'))}%>|
+    <%= link_to "Incomplete", tasks_path(task_filter: "Incomplete"), {:class => ("active disabled" unless current_page?('/tasks?task_filter=All'))}%>
   </div>
 </div>
 <table class="table">
   <thead class="row-md-3">
     <tr>
-      <th>Description</th>
-      <th>Complete</th>
-      <th>Due Date</th>
+      <th><%= link_to 'Description', tasks_path(sort_by: "description") %></th>
+      <th><%= link_to 'Complete', tasks_path(sort_by: "complete") %></th>
+      <th><%= link_to 'Due Date', tasks_path(sort_by: "due_date") %></th>
     </tr>
   </thead>
   <tbody>
