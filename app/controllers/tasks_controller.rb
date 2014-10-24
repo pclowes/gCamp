@@ -35,8 +35,6 @@ class TasksController < ApplicationController
         @tasks = Task.where(complete: false)
       end
     end
-
-
   end
 
   # GET /tasks/1
