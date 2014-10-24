@@ -5,35 +5,19 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if params[:task_filter] == "all"
-      if params[:sort_by] == "description"
-        @tasks = Task.order(:description)
-      elsif params[:sort_by] == "complete"
-        @tasks = Task.order(:complete)
-      elsif params[:sort_by] == "due_date"
-        @tasks = Task.order(:due_date)
-      else
-        @tasks = Task.all
-      end
+      @tasks = Task.all
     elsif params[:task_filter] == "incomplete"
-      if params[:sort_by] == "description"
-        @tasks = Task.order(:description).where(complete: false)
-      elsif params[:sort_by] == "complete"
-        @tasks = Task.order(:complete).where(complete: false)
-      elsif params[:sort_by] == "due_date"
-        @tasks = Task.order(:due_date).where(complete: false)
-      else
         @tasks = Task.where(complete: false)
-      end
+
+    elsif params[:sort_by] == "description"
+      @tasks = Task.order(:description)
+    elsif params[:sort_by] == "complete"
+      @tasks = Task.order(:complete)
+    elsif params[:sort_by] == "due_date"
+      @tasks = Task.order(:due_date)
+
     else
-      if params[:sort_by] == "description"
-        @tasks = Task.order(:description).where(complete: false)
-      elsif params[:sort_by] == "complete"
-        @tasks = Task.order(:complete).where(complete: false)
-      elsif params[:sort_by] == "due_date"
-        @tasks = Task.order(:due_date).where(complete: false)
-      else
-        @tasks = Task.where(complete: false)
-      end
+      @tasks = Task.where(complete: false)
     end
   end
 
