@@ -56,7 +56,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(task_params)
         format.html {
-          if params[:source]="index"
+          if params[:source]== "index"
             redirect_to tasks_url, notice: 'Task was successfully updated.'
           else
             redirect_to @task, notice: 'Task was successfully updated.'
@@ -88,6 +88,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:description, :complete, :due_date)
+      params.require(:task).permit(:description, :complete, :due_date, :source)
     end
 end
