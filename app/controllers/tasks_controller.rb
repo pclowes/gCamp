@@ -1,15 +1,18 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  require 'csv'
 
   # GET /tasks
   # GET /tasks.json
   def index
     if params[:task_filter] == "all"
       @tasks = Task.order(params[:sort_by])
+       csv(@tasks)
     elsif params[:task_filter] == "incomplete"
       @tasks = Task.where(complete: false).order(params[:sort_by])
     else
       @tasks = Task.where(complete: false).order(params[:sort_by])
+       csv(@tasks)
     end
   end
 
@@ -74,6 +77,18 @@ class TasksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def csv(file)
+      file
+      respond_to do |format|
+        format.html
+        format.csv do
+          headers['Content-Disposition'] = "attachment; filename=\"task-list\""
+          headers['Content-Type'] ||= 'text/csv'
+       end
+    end
+
+
+
     def set_task
       @task = Task.find(params[:id])
     end
@@ -82,4 +97,5 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:description, :complete, :due_date, :source)
     end
+  end
 end

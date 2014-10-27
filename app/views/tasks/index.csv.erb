@@ -1,0 +1,5 @@
+<%- headers = ['Description', 'Complete','Due Date'] -%>
+<%= CSV.generate_line headers %>
+<%- @tasks.each do |task| -%>
+  <%= CSV.generate_line([task.description, task.complete, task.due_date]) %>
+<%- end -%>
