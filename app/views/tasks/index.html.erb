@@ -3,9 +3,10 @@
 <% end %>
 <div class="page-header">
   <span class="h1">Tasks</span>
-
-  <%= link_to 'Create Task', new_task_path, class: "btn btn-info pull-right" %>
-  <%= link_to 'Download CSV', tasks_path(format: :csv, task_filter: params[:task_filter], sort_by: params[:sort_by]), class: 'btn btn-info pull-right' %>
+  <div class= "btn-toolbar pull-right">
+    <%= link_to 'Create Task', new_task_path, class: "btn btn-info" %>
+    <%= link_to 'Download CSV', tasks_path(format: :csv, task_filter: params[:task_filter], sort_by: params[:sort_by]), class: 'btn btn-info pull-right' %>
+  </div>
   <div class="btn pull-right">
     <%= link_to "All", tasks_path(task_filter: "all", sort_by: params[:sort_by]), {:class => ("active disabled" if params[:task_filter]=="all")}%>|
     <%= link_to "Incomplete", tasks_path(task_filter: "incomplete", sort_by: params[:sort_by]), {:class => ("active disabled" unless params[:task_filter]=="all")}%>

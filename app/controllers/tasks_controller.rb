@@ -7,13 +7,12 @@ class TasksController < ApplicationController
   def index
     if params[:task_filter] == "all"
       @tasks = Task.order(params[:sort_by])
-       csv(@tasks)
     elsif params[:task_filter] == "incomplete"
       @tasks = Task.where(complete: false).order(params[:sort_by])
     else
       @tasks = Task.where(complete: false).order(params[:sort_by])
-       csv(@tasks)
     end
+    csv(@tasks)
   end
 
   # GET /tasks/1
