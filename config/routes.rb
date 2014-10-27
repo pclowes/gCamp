@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :tasks
+  resources :users
 
   root "pages#homepage"
   get '/about' => "about#about", as: :about

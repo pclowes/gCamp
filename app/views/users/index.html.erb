@@ -1,0 +1,31 @@
+<% if notice %>
+  <p align="center" class="alert alert-success" id="notice"><%= notice %></p>
+<% end %>
+<div class="page-header">
+  <span class="h1">Users</span>
+  <%= link_to 'Create User', new_user_path, class: "btn btn-info pull-right" %>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Email
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.first_name %>
+          <%= user.last_name %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+    <% end %>
+  </tbody>
+</table>

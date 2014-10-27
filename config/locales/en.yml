@@ -26,6 +26,7 @@ en:
   about: "About"
   home: "Home"
   faq: "FAQ"
+  users: "Users"
   date:
     formats:
       default: "%m/%d/%Y"
