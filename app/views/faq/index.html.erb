@@ -1,16 +1,14 @@
 <div>
   <a name="top"></a>
   <h2>Frequently Asked Questions</h2>
-  <% Faq.all.each do |faq| %>
-    <a href=#<%= faq.slug %>>
-      <ul>
-          <li><%= faq.question %></li>
-      </ul>
-    </a>
+  <% @faqs.each do |faq| %>
+    <ul>
+        <li><%= faq.question %></li>
+    </ul>
   <% end %>
   <br></br>
-  <% @faqsort.each do |faq| %>
-    <a name="<%= faq.slug %>"></a>
+  <% @faqs.each do |faq| %>
+    <a name="<%= faq %>"></a>
     <h4><%= faq.question %></h4>
       <p><%= faq.answer %></p>
     <div class="faqend">
