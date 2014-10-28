@@ -35,16 +35,18 @@
             <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" %>
             <% unless task.complete? %>
               <%= form_for task, html: {class: "btn"} do %>
-                <input id="task_complete" name="task[complete]" type="hidden" value="1">
-                <%tasks_path(task_filter: params[:task_filter], sort_by: params[:sort_by]) %>
+                <input type="hidden" id="task_complete" name="task[complete]"  value="1">
+                <input type="hidden" name="task_filter" value="<%=params[:task_filter] %>" >
+                <input type="hidden" name="sort_by" value="<%=params[:sort_by] %>">
                 <input type="hidden" name="source" value="index">
                 <button class="btn btn-primary" type="submit">
                   <i class="glyphicon glyphicon-check"></i>
                 </button>
                 </input>
                 </input>
+                </input>
+                </input>
               <% end %>
-            <% else %>
             <% end %>
           </div>
         </td>

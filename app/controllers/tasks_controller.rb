@@ -51,7 +51,7 @@ class TasksController < ApplicationController
       if @task.update(task_params)
         format.html {
           if params[:source]== "index"
-            redirect_to tasks_url, notice: 'Task was successfully updated.'
+            redirect_to tasks_url(task_filter: params[:task_filter], sort_by: params[:sort_by]), notice: 'Task was successfully updated.'
           else
             redirect_to @task, notice: 'Task was successfully updated.'
           end
