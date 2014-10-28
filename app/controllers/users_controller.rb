@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
+
   def index
     @users = User.all
   end
@@ -15,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       @user.save
-      format.html { redirect_to users_path, notice: 'User was successfully created.' }
+      format.html {redirect_to users_path, notice: 'User was successfully created.'}
     end
   end
 
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       @user.update(user_params)
-        format.html {redirect_to users_url, notice: 'User was successfully updated.'}
+      format.html {redirect_to users_url, notice: 'User was successfully updated.'}
     end
   end
 
