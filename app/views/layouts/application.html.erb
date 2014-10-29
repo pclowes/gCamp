@@ -5,12 +5,12 @@
     <title>gCamp</title>
   </head>
   <body class="<%='homepage' if current_page?'/'%>">
-    <div class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
         <%= link_to "gCamp", root_path, class: "navbar-brand"  %>
       </div>
     </div>
-    <div class="container">
+    <div class="container special">
       <%= yield %>
     </div>
       <div class="footer">
