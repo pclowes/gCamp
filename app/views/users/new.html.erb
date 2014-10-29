@@ -1,2 +1,26 @@
 <h1 class="page-header">New User</h1>
-<%= render 'form' %>
+<%= form_for(@user, html: {class: "form-horizontal"}) do |f| %>
+  <div class="form-group">
+    <label class="col-sm-2">First Name</label>
+    <div class="col-sm-4">
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2">Last Name</label>
+    <div class="col-sm-4">
+        <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2"><%= f.label :email %></label>
+    <div class="col-sm-4">
+        <%= f.email_field :email, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-5">
+      <%= f.submit class: "btn btn-primary"%>
+    </div>
+  </div>
+<% end %>
