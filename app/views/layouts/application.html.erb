@@ -18,9 +18,10 @@
           <div align="left" class="col-md-6">
             <%= link_to t(:home), root_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
             <%= link_to t(:users), users_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
+            <%= link_to t(:tasks), tasks_path, {:class => ("active disabled" if current_page?('/tasks'))}%> |
+            <%= link_to t(:projects), projects_path, {:class => ("active disabled" if current_page?('/projects'))}%> |
             <%= link_to t(:about), about_path, {:class => ("active disabled" if current_page?('/about'))}%> |
             <%= link_to t(:terms), terms_path, {:class => ("active disabled" if current_page?('/terms'))}%> |
-            <%= link_to t(:tasks), tasks_path, {:class => ("active disabled" if current_page?('/tasks'))}%> |
             <%= link_to t(:faq), faq_path, {:class => ("active disabled" if current_page?('/faq'))}%>
           </div>
           <div align="right" class="col-md-6">

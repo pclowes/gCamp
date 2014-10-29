@@ -27,6 +27,7 @@ en:
   home: "Home"
   faq: "FAQ"
   users: "Users"
+  projects: "Projects"
   date:
     formats:
       default: "%m/%d/%Y"

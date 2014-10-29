@@ -1,0 +1,10 @@
+<% if notice %>
+  <p align="center" class="alert alert-success" id="notice"><%= notice %></p>
+<% end %>
+<div class="page-header">
+  <span class="h1"><%= @project.name %></span>
+  <div class="btn-toolbar pull-right">
+    <%= link_to 'Edit', edit_project_path, class: "btn btn-info" %>
+    <%= link_to 'Destroy', project_path, method: :delete, class: "btn btn-danger "%>
+  </div>
+</div>
