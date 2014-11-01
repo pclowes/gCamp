@@ -1,3 +1,15 @@
+<ol class="breadcrumb">
+  <li>
+    <a>
+      <%= link_to "Tasks", tasks_path %>
+    </a>
+  </li>
+  <li>
+    <a>
+      <%= @task.description %>
+    </a>
+  <li class="active">Show Task</li>
+</ol>
 <% if notice %>
   <p align="center" class="alert alert-success" id="notice"><%= notice %></p>
 <% end %>
