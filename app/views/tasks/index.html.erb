@@ -13,9 +13,9 @@
   </div>
 </div>
 <table class="table">
-  <thead class="row-md-3">
+  <thead>
     <tr>
-      <th><%= link_to 'Description', tasks_path(task_filter: params[:task_filter], sort_by: "description") %></th>
+      <th class="col-md-5"><%= link_to 'Description', tasks_path(task_filter: params[:task_filter], sort_by: "description") %></th>
       <th><%= link_to 'Complete', tasks_path(task_filter: params[:task_filter], sort_by: "complete") %></th>
       <th><%= link_to 'Due Date', tasks_path(task_filter: params[:task_filter], sort_by: "due_date") %></th>
     </tr>
@@ -25,7 +25,7 @@
       <% if task.upcoming? %>
       <tr class="alert alert-danger">
       <% end %>
-        <td><%= task.description %></td>
+        <td class="col-md-5"><%= task.description %></td>
         <td><%= task.complete %></td>
         <td><%= l task.due_date if task.due_date %></td>
         <td>
