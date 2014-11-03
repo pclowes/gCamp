@@ -6,11 +6,11 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if params[:task_filter] == "all"
-      @tasks = Task.order(params[:sort_by])
+      @tasks = Task.order(params[:sort_by]).page(params[:page])
     elsif params[:task_filter] == "incomplete"
-      @tasks = Task.where(complete: false).order(params[:sort_by])
+      @tasks = Task.where(complete: false).order(params[:sort_by]).page(params[:page])
     else
-      @tasks = Task.where(complete: false).order(params[:sort_by])
+      @tasks = Task.where(complete: false).order(params[:sort_by]).page(params[:page])
     end
     csv(@tasks)
   end

@@ -4,7 +4,11 @@ group :production do
   gem "rails_12factor"
 end
 
+#for pagination
 gem "kaminari"
+
+#to seed databases
+gem 'faker'
 
 gem "pg"
 # Internationalize all the things
