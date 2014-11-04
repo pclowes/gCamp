@@ -1,8 +1,10 @@
 <div class="well col-md-offset-4 col-md-4">
   <h1>Sign In</h1>
-  <%= form_tag signin_path do |f| %>
+  <%= form_tag signin_path do |f|  %>
     <% if @sign_in_error %>
-      <%= @sign_in_error %>
+      <div style="color:red">
+        <%= @sign_in_error %>
+      </div>
     <% end %>
     <div class="form-group">
       <div>
