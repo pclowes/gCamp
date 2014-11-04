@@ -10,7 +10,7 @@
         <%= link_to "gCamp", root_path, class: "navbar-brand"  %>
         <div class="navbar-text ul-nav navbar-nav navbar-right">
           <% if current_user %>
-            <%= current_user.first_name+' '+current_user.last_name %>
+            <%= link_to current_user.first_name+' '+current_user.last_name, users_path, {:class => ("active disabled" if current_page?('/tasks'))}%> |
             <%= link_to "Sign Out", signout_path %>
           <% else %>
             <%= link_to "Sign Up", signup_path %>
