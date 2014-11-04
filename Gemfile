@@ -1,7 +1,13 @@
 source 'https://rubygems.org'
 
 group :production do
-  gem "rails_12factor"
+  gem 'rails_12factor'
+end
+
+group :development do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 #for pagination
@@ -47,6 +53,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
 
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
