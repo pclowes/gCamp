@@ -8,5 +8,5 @@
 100.times do
    Task.create description: Faker::Lorem.sentence,
                complete: [true, false, true, false].sample,
-               due: Faker::Time.forward(21)
+               due_date: Faker::Time.forward(21)
 end
