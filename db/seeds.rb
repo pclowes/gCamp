@@ -5,8 +5,3 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-100.times do
-   Task.create description: Faker::Lorem.sentence,
-               complete: [true, false, true, false].sample,
-               due_date: Faker::Time.forward(21)
-end
