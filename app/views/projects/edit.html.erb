@@ -1,7 +1,7 @@
 <h1 class="page-header">Create Project</h1>
 <%= form_for(@project, html: {class: "form-horizontal"}) do |f| %>
   <div class="form-group">
-    <label class="col-sm-1">Name</label>
+    <label class="col-sm-1"><%= f.label :name %></label>
     <div class="col-sm-4">
       <%= f.text_field :name, class: "form-control" %>
     </div>
