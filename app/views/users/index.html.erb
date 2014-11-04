@@ -20,7 +20,7 @@
     <% @users.each do |user| %>
       <tr>
         <td class="col-sm-2">
-          <%= link_to user.first_name, user %>
+          <%= link_to "#{user.first_name} #{user.last_name}", user %>
         </td>
         <td>
           <%= mail_to user.email %>

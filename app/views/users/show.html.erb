@@ -1,5 +1,5 @@
 <div class="page-header">
-  <span class="h1"><%= @user.first_name+' '+@user.last_name %></span>
+  <span class="h1"><%= "#{@user.first_name} #{@user.last_name}" %></span>
   <%= link_to 'Edit', edit_user_path, class: "btn btn-info pull-right" %>
 </div>
 <div class="form-horizontal">

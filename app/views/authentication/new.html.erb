@@ -2,7 +2,7 @@
   <h1>Sign In</h1>
   <%= form_tag signin_path do |f| %>
     <% if @sign_in_error %>
-        <div color="red"><%= @sign_in_error %></div>
+      <%= @sign_in_error %>
     <% end %>
     <div class="form-group">
       <div>
