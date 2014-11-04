@@ -9,3 +9,4 @@
    Task.create description: Faker::Lorem.sentence,
                complete: [true, false, true, false].sample,
                due: Faker::Time.forward(21)
+end
