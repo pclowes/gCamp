@@ -13,7 +13,9 @@ feature "Users" do
     click_on "Create User"
     expect(page).to have_content("Foo")
   end
+end
 
+feature "Users" do
   scenario "edits a user" do
     User.create!(
       first_name: "baz",
@@ -32,7 +34,9 @@ feature "Users" do
     expect(page).to have_content("Blah")
     expect(page).to have_no_content("baz")
   end
+end
 
+feature "Users" do
   scenario "shows a user" do
     User.create!(
       first_name: "baz",
@@ -46,7 +50,9 @@ feature "Users" do
     click_on "baz"
     expect(page).to have_content("baz")
   end
+end
 
+feature "Users" do
   scenario "destroys a user" do
     User.create!(
       first_name: "baz",
