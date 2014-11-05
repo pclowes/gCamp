@@ -16,7 +16,7 @@ feature "Signup" do
     end
     expect(page).to have_no_content("Sign Up")
     expect(page).to have_no_content("Sign In")
-    expect(page).to have_content("foo@bar.com")
+    expect(page).to have_content("Foo Bar")
     expect(page).to have_content("Sign Out")
   end
 end

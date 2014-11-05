@@ -7,16 +7,32 @@
   <body class="<%='homepage' if current_page?'/'%>">
     <div class="navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
-        <%= link_to "gCamp", root_path, class: "navbar-brand"  %>
-        <div class="navbar-text ul-nav navbar-nav navbar-right">
-          <% if current_user %>
-            <%= link_to "#{current_user.email}", current_user, {:class => ("active" if current_page?("/users/#{current_user[:id]}"))}%> |
-            <%= link_to "Sign Out", signout_path %>
-          <% else %>
-            <%= link_to "Sign Up", signup_path, {:class => ("active" if params[:controller] == "registrations")} %> |
-            <%= link_to "Sign In", signin_path, {:class => ("active" if params[:controller] == "authentication")} %>
-          <% end %>
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<%= root_path %>">gCamp</a>
         </div>
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+            <li>
+              <%= link_to "#{current_user.first_name} #{current_user.last_name}", current_user, {:class => ("active" if current_page?("/users/#{current_user[:id]}"))}%>
+            </li>
+            <li>
+              <%= link_to "Sign Out", signout_path %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "Sign Up", signup_path, {:class => ("active" if params[:controller] == "registrations")} %>
+            </li>
+            <li>
+              <%= link_to "Sign In", signin_path, {:class => ("active" if params[:controller] == "authentication")} %>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
     <div class="container special">

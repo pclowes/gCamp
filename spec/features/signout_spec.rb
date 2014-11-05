@@ -21,11 +21,11 @@ feature "Signout" do
     expect(page).to have_no_content("Sign Up")
     expect(page).to have_no_content("Sign In")
     expect(page).to have_content("Sign Out")
-    expect(page).to have_content("foo@bar.com")
+    expect(page).to have_content("foo bar")
     click_on "Sign Out"
     expect(page).to have_content("Sign Up")
     expect(page).to have_content("Sign In")
     expect(page).to have_no_content("Sign Out")
-    expect(page).to have_no_content("foo@bar.com")
+    expect(page).to have_no_content("foo bar")
   end
 end
