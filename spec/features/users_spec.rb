@@ -11,11 +11,9 @@ feature "Users" do
     fill_in "Password", with: "test"
     fill_in "Password confirmation", with: "test"
     click_on "Create User"
-    expect(page).to have_content("Foo")
+    expect(page).to have_content("Blah")
   end
-end
 
-feature "Users" do
   scenario "edits a user" do
     User.create!(
       first_name: "baz",
@@ -34,37 +32,33 @@ feature "Users" do
     expect(page).to have_content("Blah")
     expect(page).to have_no_content("baz")
   end
-end
 
-feature "Users" do
   scenario "shows a user" do
     User.create!(
-      first_name: "baz",
+      first_name: "baz3",
       last_name: "bar",
-      email: "baz@bar.com",
+      email: "baz3@bar.com",
       password: "test",
       password_confirmation: "test"
     )
     visit users_path
-    expect(page).to have_content("baz")
-    click_on "baz"
-    expect(page).to have_content("baz")
+    expect(page).to have_content("baz3")
+    click_on "baz3 bar"
+    expect(page).to have_content("baz3")
   end
-end
 
-feature "Users" do
   scenario "destroys a user" do
     User.create!(
-      first_name: "baz",
+      first_name: "baz4",
       last_name: "bar",
-      email: "baz@bar.com",
+      email: "baz4@bar.com",
       password: "test",
       password_confirmation: "test"
     )
     visit users_path
-    expect(page).to have_content("baz")
+    expect(page).to have_content("baz4")
     click_on "Edit"
     click_on "Destroy"
-    expect(page).to have_no_content("baz")
+    expect(page).to have_no_content("baz4")
   end
 end

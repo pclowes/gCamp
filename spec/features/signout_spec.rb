@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature "Signin" do
-  scenario "User signs in" do
+feature "Signout" do
+  scenario "User signs out" do
     User.create!(
       first_name: "Foo2",
       last_name: "11/11/13",
@@ -19,7 +19,7 @@ feature "Signin" do
     expect(page).to have_no_content("Sign Up")
     expect(page).to have_no_content("Sign In")
     expect(page).to have_content("Sign Out")
-    
+
     click_on "Sign Out"
     expect(page).to have_content("Sign Up")
     expect(page).to have_content("Sign In")
