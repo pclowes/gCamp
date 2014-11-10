@@ -10,6 +10,16 @@ feature "Projects" do
     expect(page).to have_content("Foo")
   end
 
+  scenario "User creates a project w/o name" do
+    visit projects_path
+    expect(page).to have_no_content("Foo")
+    click_on "Create Project"
+    fill_in "Name", with: ""
+    click_on "Create Project"
+    expect(page).to have_content("Name can't be blank")
+  end
+
+
   scenario "User edits a project" do
     visit projects_path
     expect(page).to have_no_content("Foo")

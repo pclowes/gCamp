@@ -14,9 +14,10 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    respond_to do |format|
-      @project.save
-      format.html {redirect_to project_path(@project), notice: 'Project was successfully created.'}
+    if @project.save
+      redirect_to project_path(@project), notice: 'Project was successfully created.'
+    else
+      render :new
     end
   end
 
