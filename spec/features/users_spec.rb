@@ -17,7 +17,58 @@ feature "Users" do
     expect(page).to have_content("bar")
     expect(page).to have_content("foo@bar.com")
   end
-  
+
+  scenario "creates a user w/o first name" do
+    visit users_path
+    expect(page).to have_no_content("foo")
+    expect(page).to have_no_content("bar")
+    expect(page).to have_no_content("foo@bar.com")
+    click_on "Create User"
+    fill_in "First name", with: ""
+    fill_in "Last name", with: "bar"
+    fill_in "Email", with: "foo@bar.com"
+    fill_in "Password", with: "test"
+    fill_in "Password confirmation", with: "test"
+    click_on "Create User"
+    expect(page).to have_content("First name can't be blank")
+  end
+
+  scenario "creates a user w/o last name" do
+    visit users_path
+    expect(page).to have_no_content("foo")
+    expect(page).to have_no_content("bar")
+    expect(page).to have_no_content("foo@bar.com")
+    click_on "Create User"
+    fill_in "First name", with: "foo"
+    fill_in "Last name", with: ""
+    fill_in "Email", with: "foo@bar.com"
+    fill_in "Password", with: "test"
+    fill_in "Password confirmation", with: "test"
+    click_on "Create User"
+    expect(page).to have_content("Last name can't be blank")
+  end
+
+  scenario "creates a user w/ non-uniqe email" do
+    User.create!(
+      first_name: "foo",
+      last_name: "bar",
+      email: "foo@bar.com",
+      password: "test",
+      password_confirmation: "test"
+    )
+    visit users_path
+    click_on "Create User"
+    fill_in "First name", with: "foo"
+    fill_in "Last name", with: "foo"
+    fill_in "Email", with: "foo@bar.com"
+    fill_in "Password", with: "test"
+    fill_in "Password confirmation", with: "test"
+    click_on "Create User"
+    expect(page).to have_content("Email has already been taken")
+  end
+
+
+
 
   scenario "edits a user" do
     User.create!(
