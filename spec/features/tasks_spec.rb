@@ -13,7 +13,18 @@ feature "Tasks" do
     expect(page).to have_content("foobar")
     expect(page).to have_content("11/11/2014")
     expect(page).to have_content("false")
+  end
 
+  scenario "User creates a task w/o descritption" do
+    visit tasks_path
+    expect(page).to have_no_content("foobar")
+    expect(page).to have_no_content("2014-11-11")
+    expect(page).to have_no_content("false")
+    click_on "Create Task"
+    fill_in "Description", with: ""
+    fill_in "Due date", with: "2014-11-11"
+    click_on "Create Task"
+    expect(page).to have_content("Description can't be blank")
   end
 
   scenario "User edits a task" do

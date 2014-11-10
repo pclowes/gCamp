@@ -17,6 +17,7 @@ feature "Users" do
     expect(page).to have_content("bar")
     expect(page).to have_content("foo@bar.com")
   end
+  
 
   scenario "edits a user" do
     User.create!(
