@@ -1,7 +1,6 @@
 require 'rails_helper'
-
 describe User do
-  it 'creates a user w/ non-unique email' do
+  it 'validates the uniqueness of a users email' do
     User.create!(
       first_name: "foo",
       last_name: "bar",
@@ -9,17 +8,18 @@ describe User do
       password: "test",
       password_confirmation: "test"
     )
-    user = User.new
-    user.save
-    expect(user.valid?).to be(false)
-    user.first_name = 'foo'
-    expect(user.valid?).to be(false)
-    user.last_name = 'bar'
-    expect(user.valid?).to be(false)
-    user.email = 'foo@bar.com'
-    expect(user.valid?).to be(false)
-    user.password = 'test'
-    user.password_confirmation = 'test'
-    expect(user.valid?).to be(false)
+    user = User.new(
+      first_name: "foo",
+      last_name: "bar",
+      email: "foo@bar.com",
+      password: "test",
+      password_confirmation: "test"
+    )
+    user.valid?
+    expect(user.errors[:email].present?).to eq(true)
+
+    user.email = 'oof@bar.com'
+    user.valid?
+    expect(user.errors[:email].present?).to eq(false)
   end
 end
