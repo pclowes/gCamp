@@ -1,0 +1,39 @@
+<h1 class="page-header"><%= title %></h1>
+<%= form_for(@user, html: {class: "form-horizontal"}) do |f| %>
+  <%= render 'shared/errors', record: @user %>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"><%= f.label :first_name %></label>
+    <div class="col-sm-4">
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"><%= f.label :last_name %></label>
+    <div class="col-sm-4">
+        <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"><%= f.label :email %></label>
+    <div class="col-sm-4">
+        <%= f.email_field :email, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"><%= f.label :password %></label>
+    <div class="col-sm-4">
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"><%= f.label :password_confirmation %></label>
+    <div class="col-sm-4">
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-5">
+      <%= f.submit class: "btn btn-primary"%>
+    </div>
+  </div>
+<% end %>
