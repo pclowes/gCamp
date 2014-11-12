@@ -10,6 +10,9 @@ group :development do
   gem 'launchy'
 end
 
+
+#for debugging
+gem 'pry'
 #for pagination
 gem "kaminari"
 

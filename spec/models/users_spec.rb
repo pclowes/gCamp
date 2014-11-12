@@ -10,6 +10,7 @@ describe User do
       password_confirmation: "test"
     )
     user = User.new
+    user.save
     expect(user.valid?).to be(false)
     user.first_name = 'foo'
     expect(user.valid?).to be(false)
