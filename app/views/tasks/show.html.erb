@@ -1,13 +1,7 @@
 <ol class="breadcrumb">
-  <li>
-    <a>
-      <%= link_to "Tasks", project_tasks_path %>
-    </a>
-  </li>
-  <li>
-    <a>
-      <%= @task.description %>
-    </a>
+  <li><%= link_to @project.name, projects_path %>
+  <li><%= link_to "Tasks", project_tasks_path %></li>
+  <li><%= @task.description %></li>
   <li class="active">Show Task</li>
 </ol>
 <% if notice %>
