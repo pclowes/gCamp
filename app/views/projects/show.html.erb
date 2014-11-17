@@ -1,3 +1,7 @@
+<ol class="breadcrumb">
+  <li><%= link_to "Projects", projects_path %></li>
+  <li class="active"><%= @project.name %></li>
+</ol>
 <% if notice %>
   <p align="center" class="alert alert-success" id="notice"><%= notice %></p>
 <% end %>
@@ -8,3 +12,4 @@
     <%= link_to 'Destroy', project_path, method: :delete, class: "btn btn-danger "%>
   </div>
 </div>
+<%= link_to pluralize(@project.tasks.count, "Task"), project_tasks_path(@project) %>

@@ -1,16 +1,20 @@
 class TasksController < ApplicationController
+  before_action do
+    @project = Project.find(params[:project_id])
+  end
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+
   require 'csv'
 
   # GET /tasks
   # GET /tasks.json
   def index
     if params[:task_filter] == "all"
-      @tasks = Task.order(params[:sort_by]).page(params[:page])
+      @tasks = @project.tasks.order(params[:sort_by]).page(params[:page])
     elsif params[:task_filter] == "incomplete"
-      @tasks = Task.where(complete: false).order(params[:sort_by]).page(params[:page])
+      @tasks = @project.tasks.where(complete: false).order(params[:sort_by]).page(params[:page])
     else
-      @tasks = Task.where(complete: false).order(params[:sort_by]).page(params[:page])
+      @tasks = @project.tasks.where(complete: false).order(params[:sort_by]).page(params[:page])
     end
     csv(@tasks)
   end
@@ -22,7 +26,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @task = @project.tasks.new
   end
 
   # GET /tasks/1/edit
@@ -32,10 +36,10 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = @project.tasks.new(task_params)
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to project_task_path(@project, @task), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -52,9 +56,9 @@ class TasksController < ApplicationController
       if @task.update(task_params)
         format.html {
           if params[:source]== "index"
-            redirect_to tasks_url(task_filter: params[:task_filter], sort_by: params[:sort_by]), notice: 'Task was successfully updated.'
+            redirect_to project_tasks_url(task_filter: params[:task_filter], sort_by: params[:sort_by]), notice: 'Task was successfully updated.'
           else
-            redirect_to @task, notice: 'Task was successfully updated.'
+            redirect_to project_task_path(@project, @task), notice: 'Task was successfully updated.'
           end
         }
         format.json { render :show, status: :ok, location: @task }
@@ -70,7 +74,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to project_tasks_path(@project), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -89,7 +93,7 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = @project.tasks.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

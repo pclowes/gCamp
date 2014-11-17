@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
   <li>
     <a>
-      <%= link_to "Tasks", tasks_path %>
+      <%= link_to "Tasks", project_tasks_path %>
     </a>
   </li>
   <li>
@@ -26,5 +26,5 @@
   <%= l @task.due_date if @task.due_date %>
 </p>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Edit', edit_project_task_path(@project, @task) %> |
+<%= link_to 'Back', project_tasks_path %>

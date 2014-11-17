@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
   validates :description, presence: true
   validate :due_date_cannot_be_in_the_past, on: :create
+  belongs_to :project
 
   before_validation on: :create do
     self.created_at = Date.today

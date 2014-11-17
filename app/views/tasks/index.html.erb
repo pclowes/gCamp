@@ -4,20 +4,20 @@
 <div class="page-header">
   <span class="h1">Tasks</span>
   <div class= "btn-toolbar pull-right">
-    <%= link_to 'Create Task', new_task_path, class: "btn btn-info" %>
-    <%= link_to 'Download CSV', tasks_path(format: :csv, task_filter: params[:task_filter], sort_by: params[:sort_by]), class: 'btn btn-info pull-right' %>
+    <%= link_to 'Create Task', new_project_task_path, class: "btn btn-info" %>
+    <%= link_to 'Download CSV', project_tasks_path(format: :csv, task_filter: params[:task_filter], sort_by: params[:sort_by]), class: 'btn btn-info pull-right' %>
   </div>
   <div class="btn pull-right">
-    <%= link_to "All", tasks_path(task_filter: "all", sort_by: params[:sort_by]), {:class => ("active disabled" if params[:task_filter]=="all")}%>|
-    <%= link_to "Incomplete", tasks_path(task_filter: "incomplete", sort_by: params[:sort_by]), {:class => ("active disabled" unless params[:task_filter]=="all")}%>
+    <%= link_to "All", project_tasks_path(task_filter: "all", sort_by: params[:sort_by]), {:class => ("active disabled" if params[:task_filter]=="all")}%>|
+    <%= link_to "Incomplete", project_tasks_path(task_filter: "incomplete", sort_by: params[:sort_by]), {:class => ("active disabled" unless params[:task_filter]=="all")}%>
   </div>
 </div>
 <table class="table">
   <thead>
     <tr>
-      <th class="col-md-5"><%= link_to 'Description', tasks_path(task_filter: params[:task_filter], sort_by: "description") %></th>
-      <th><%= link_to 'Complete', tasks_path(task_filter: params[:task_filter], sort_by: "complete") %></th>
-      <th><%= link_to 'Due Date', tasks_path(task_filter: params[:task_filter], sort_by: "due_date") %></th>
+      <th class="col-md-5"><%= link_to 'Description', project_tasks_path(task_filter: params[:task_filter], sort_by: "description") %></th>
+      <th><%= link_to 'Complete', project_tasks_path(task_filter: params[:task_filter], sort_by: "complete") %></th>
+      <th><%= link_to 'Due Date', project_tasks_path(task_filter: params[:task_filter], sort_by: "due_date") %></th>
     </tr>
   </thead>
   <tbody>
@@ -30,11 +30,11 @@
         <td><%= l task.due_date if task.due_date %></td>
         <td>
           <div class= "btn-toolbar pull-right">
-            <%= link_to 'Show', task, class: "btn btn-primary"  %>
-            <%= link_to 'Edit', edit_task_path(task), class: "btn btn-success"  %>
-            <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" %>
+            <%= link_to 'Show', project_task_path(@project, task), class: "btn btn-primary"  %>
+            <%= link_to 'Edit', edit_project_task_path(@project, task), class: "btn btn-success"  %>
+            <%= link_to 'Destroy', project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" %>
             <% unless task.complete? %>
-              <%= form_for task, html: {class: "btn"} do %>
+              <%= form_for [@project, task], html: {class: "btn"} do %>
                 <input type="hidden" id="task_complete" name="task[complete]"  value="1">
                 <input type="hidden" name="task_filter" value="<%=params[:task_filter] %>" >
                 <input type="hidden" name="sort_by" value="<%=params[:sort_by] %>">
