@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :users
   resources :projects do
     resources :tasks
+    resources :memberships
   end
+
 
   root "pages#homepage"
   get '/about' => "about#about", as: :about

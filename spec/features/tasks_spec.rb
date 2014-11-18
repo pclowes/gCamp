@@ -3,7 +3,15 @@ require 'date'
 
 feature "Tasks" do
   scenario "User creates a task" do
-    visit tasks_path
+    Project.create!(
+      name: "test project"
+    )
+    visit projects_path
+    expect(page).to have_content("test project")
+    click_on "test project"
+    expect(page).to have_content("0 Tasks")
+    click_on "0 Tasks"
+    expect(page).to have_content("Tasks for test project")
     expect(page).to have_no_content("foobar")
     expect(page).to have_no_content(Date.tomorrow.to_s)
     expect(page).to have_no_content("false")
@@ -17,7 +25,15 @@ feature "Tasks" do
   end
 
   scenario "User creates a task w/o description" do
-    visit tasks_path
+    Project.create!(
+      name: "test project"
+    )
+    visit projects_path
+    expect(page).to have_content("test project")
+    click_on "test project"
+    expect(page).to have_content("0 Tasks")
+    click_on "0 Tasks"
+    expect(page).to have_content("Tasks for test project")
     expect(page).to have_no_content("foobar")
     expect(page).to have_no_content(Date.today.to_s)
     expect(page).to have_no_content("false")
@@ -29,7 +45,15 @@ feature "Tasks" do
   end
 
   scenario "User creates a task w/ due date in the past" do
-    visit tasks_path
+    Project.create!(
+      name: "test project"
+    )
+    visit projects_path
+    expect(page).to have_content("test project")
+    click_on "test project"
+    expect(page).to have_content("0 Tasks")
+    click_on "0 Tasks"
+    expect(page).to have_content("Tasks for test project")
     expect(page).to have_no_content("foobar")
     expect(page).to have_no_content("2011-11-11")
     expect(page).to have_no_content("false")
@@ -45,8 +69,9 @@ feature "Tasks" do
       description: "foobar",
       due_date: Date.tomorrow.to_s,
       complete: false
+      
     )
-    visit tasks_path
+    visit project_tasks_path
     expect(page).to have_content("foobar")
     expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
     expect(page).to have_content("false")
@@ -69,7 +94,7 @@ feature "Tasks" do
       due_date: Date.tomorrow.to_s,
       complete: false
     )
-    visit tasks_path
+    visit project_tasks_path
     expect(page).to have_content("foobar")
     expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
     expect(page).to have_content("false")
@@ -89,7 +114,7 @@ feature "Tasks" do
       due_date: Date.tomorrow.to_s,
       complete: false
     )
-    visit tasks_path
+    visit project_tasks_path
     expect(page).to have_content("foobar")
     expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
     expect(page).to have_content("false")
