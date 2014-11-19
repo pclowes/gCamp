@@ -18,10 +18,10 @@ class MembershipsController < ApplicationController
   end
 
   def update
-    @membership = Membership.find(params[:id])
-    @membership.update(allowed_params)
-    if @membership.save
-      redirect_to project_memberships_path
+    membership = Membership.find(params[:id])
+    membership.update(allowed_params)
+    if membership.save
+      redirect_to project_memberships_path, notice: "#{membership.user.full_name} was updated successfully."
     else
       render :index
     end
