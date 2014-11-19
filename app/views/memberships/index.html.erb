@@ -13,7 +13,8 @@
 <div class="well form-inline col col-sm-8">
   <%= form_for [@project, @membership] do |f| %>
     <%= f.collection_select :user_id, User.order(:first_name), :id, :full_name, {:prompt => "Please select a user..."}, {class: "dropdown form-control"} %>
-    <%= f.select :title, [['Member', false],['Owner', true]], {prompt: true}, {class: "dropdown-toggle form-control"} %>
+    <%= f.select :title, [['Member', false],['Owner', true]],
+      {prompt: true}, {class: "dropdown-toggle form-control"} %>
     <%= f.submit 'Add New Member', class: "btn btn-primary" %>
   <% end %>
 </div>
@@ -44,7 +45,7 @@
                 <%= link_to user.full_name, user_path(user) %>
               </td>
               <td>
-                <%= f.select :title, [['Member', false],['Owner', true]], {}, {class: "dropdown-toggle form-control"} %>
+                <%= f.select :title, [['Member', false],['Owner', true]], {include_blank: false}, {class: "dropdown-toggle form-control"} %>
               </td>
               <td>
                 <%= f.submit "Update", class: "btn btn-primary" %>
