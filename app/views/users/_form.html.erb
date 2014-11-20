@@ -1,6 +1,10 @@
 <h1 class="page-header"><%= title %></h1>
 <%= form_for(@user, html: {class: "form-horizontal"}) do |f| %>
-  <%= render 'shared/errors', record: @user %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-4">
+      <%= render 'shared/errors', record: @user %>
+    </div>
+  </div>
   <div class="form-group">
     <label class="col-sm-2 control-label"><%= f.label :first_name %></label>
     <div class="col-sm-4">
