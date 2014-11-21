@@ -1,3 +1,10 @@
+<div class="page-header">
+  <span class="h1"><%= @task.description %></span>
+  <div class= "btn-toolbar pull-right">
+    <%= link_to 'Edit', edit_project_task_path(@project, @task), class: "btn btn-primary" %>
+  </div>
+</div>
+
 <ol class="breadcrumb">
   <li><%= link_to @project.name, projects_path %>
   <li><%= link_to "Tasks", project_tasks_path %></li>
@@ -9,16 +16,25 @@
 <% end %>
 
 <p>
-  <strong>Description:</strong>
-  <%= @task.description %>
+  <strong>Due Date:</strong>
+  <%= l @task.due_date if @task.due_date %>
 </p>
 <p>
   <strong>Completed:</strong>
   <%= @task.complete %>
-<p>
-  <strong>Due Date:</strong>
-  <%= l @task.due_date if @task.due_date %>
 </p>
 
-<%= link_to 'Edit', edit_project_task_path(@project, @task) %> |
-<%= link_to 'Back', project_tasks_path %>
+<div class="h2">Comments</div>
+
+<%= form_for(@comment, html: {class: "form-horizontal"}) do |f| %>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.text_field :comment, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-5">
+      <%= f.submit class: "btn btn-primary"%>
+    </div>
+  </div>
+<% end %>

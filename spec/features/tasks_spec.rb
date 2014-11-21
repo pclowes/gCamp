@@ -65,13 +65,16 @@ feature "Tasks" do
   end
 
   scenario "User edits a task" do
+    Project.create!(
+      name: "test"
+    )
     Task.create!(
       description: "foobar",
       due_date: Date.tomorrow.to_s,
-      complete: false
-      
+      complete: false,
+      project_id: project.id
     )
-    visit project_tasks_path
+    visit projects_path
     expect(page).to have_content("foobar")
     expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
     expect(page).to have_content("false")

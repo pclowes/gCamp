@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :tasks
     resources :memberships
   end
+  resources :comments
 
 
   root "pages#homepage"
