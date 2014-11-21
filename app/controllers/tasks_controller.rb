@@ -49,8 +49,6 @@ class TasksController < ApplicationController
       end
     end
   end
-
-
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
@@ -70,7 +68,6 @@ class TasksController < ApplicationController
       end
     end
   end
-
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy

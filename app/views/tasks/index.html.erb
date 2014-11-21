@@ -30,7 +30,8 @@
       <% if task.upcoming? %>
       <tr class="alert alert-danger">
       <% end %>
-        <td class="col-md-5"><%= link_to task.description, project_task_path(@project, task) %><span class="badge">3</span></td>
+        <td class="col-md-5"><%= link_to task.description, project_task_path(@project, task) %>
+          <span class="badge"><%= task.comments.count %></span></td>
         <td><%= task.complete %></td>
         <td><%= l task.due_date if task.due_date %></td>
         <td>

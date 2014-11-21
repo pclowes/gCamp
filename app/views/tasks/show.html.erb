@@ -6,10 +6,10 @@
 </div>
 
 <ol class="breadcrumb">
-  <li><%= link_to @project.name, projects_path %>
+  <li><%= link_to "Projects", projects_path %></li>
+  <li><%= link_to @project.name, project_path(@project) %>
   <li><%= link_to "Tasks", project_tasks_path %></li>
   <li><%= @task.description %></li>
-  <li class="active">Show Task</li>
 </ol>
 <% if notice %>
   <p align="center" class="alert alert-success" id="notice"><%= notice %></p>
@@ -26,7 +26,26 @@
 
 <div class="h2">Comments</div>
 
+<table class="table">
+  <tbody>
+    <% @comments.each do |comment| %>
+    <tr>
+      <td class="col-sm-3">
+        <%=  %>
+        <%= comment.created_at %>
+      </td>
+      <td class="col-sm-offset-3 col-sm-9">
+        <%= comment.comment %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
 <%= form_for(@comment, html: {class: "form-horizontal"}) do |f| %>
+  <%= hidden_field_tag :project_id, @project.id  %>
+  <%= hidden_field_tag :task_id, @task.id %>
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
       <%= f.text_field :comment, class: "form-control" %>

@@ -65,30 +65,38 @@ feature "Tasks" do
   end
 
   scenario "User edits a task" do
-    Project.create!(
+    project = Project.create!(
       name: "test"
     )
-    Task.create!(
-      description: "foobar",
-      due_date: Date.tomorrow.to_s,
-      complete: false,
-      project_id: project.id
+    project.tasks.create!(
+    description: "foobar",
+    due_date: Date.tomorrow.to_s,
+    complete: false
     )
-    visit projects_path
-    expect(page).to have_content("foobar")
-    expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
-    expect(page).to have_content("false")
+
+    visit project_tasks_path(project)
+    # within("some css selector") do
+      expect(page).to have_content("foobar")
+      expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
+      expect(page).to have_content("false")
+    # end
+
     click_on "Edit"
     fill_in "Description", with: "oofrab"
     fill_in "Due date", with: 2.days.from_now
     page.check('Complete')
     click_on "Update Task"
+    # find all of the tasks in the above css selector
+    # assert that there is only one taks
+    # expect(page.find("some css selector some child selector").length).to eq(1)
     expect(page).to have_no_content("foobar")
     expect(page).to have_no_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
     expect(page).to have_no_content("false")
-    expect(page).to have_content("oofrab")
-    expect(page).to have_content(2.days.from_now.strftime("%m/%d/%Y").to_s)
-    expect(page).to have_content("true")
+    # within("some css selector") do
+      expect(page).to have_content("oofrab")
+      expect(page).to have_content(2.days.from_now.strftime("%m/%d/%Y").to_s)
+      expect(page).to have_content("true")
+    # end
   end
 
   scenario "User shows a task" do
