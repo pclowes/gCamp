@@ -38,7 +38,7 @@
         <td>
           <div class= "btn-toolbar pull-right">
             <%= link_to 'Edit', edit_project_task_path(@project, task), class: "btn btn-primary"  %>
-            <%= link_to "", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %>
+            <%= link_to "", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, title: "Delete", class: "glyphicon glyphicon-remove" %>
             <% unless task.complete? %>
               <%= form_for [@project, task], html: {class: "btn"} do %>
                 <input type="hidden" id="task_complete" name="task[complete]"  value="1">

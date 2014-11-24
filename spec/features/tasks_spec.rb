@@ -100,36 +100,38 @@ feature "Tasks" do
   end
 
   scenario "User shows a task" do
-    Task.create!(
-      description: "foobar",
-      due_date: Date.tomorrow.to_s,
-      complete: false
+    project = Project.create!(
+    name: "test"
     )
-    visit project_tasks_path
+    project.tasks.create!(
+    description: "foobar",
+    due_date: Date.tomorrow.to_s,
+    complete: false
+    )
+    visit project_tasks_path(project)
     expect(page).to have_content("foobar")
     expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
     expect(page).to have_content("false")
-    click_on "Show"
-    expect(page).to have_content("foobar")
-    expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
-    expect(page).to have_content("false")
-    click_on "Back"
+    click_on "foobar"
     expect(page).to have_content("foobar")
     expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
     expect(page).to have_content("false")
   end
 
   scenario "User deletes a task" do
-    Task.create!(
-      description: "foobar",
-      due_date: Date.tomorrow.to_s,
-      complete: false
+    project = Project.create!(
+    name: "test"
     )
-    visit project_tasks_path
+    project.tasks.create!(
+    description: "foobar",
+    due_date: Date.tomorrow.to_s,
+    complete: false
+    )
+    visit project_tasks_path(project)
     expect(page).to have_content("foobar")
     expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
     expect(page).to have_content("false")
-    click_on "Destroy"
+    click_on "Delete"
     expect(page).to have_no_content("foobar")
     expect(page).to have_no_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
     expect(page).to have_no_content("false")

@@ -41,7 +41,7 @@ feature "Projects" do
     fill_in "Name", with: "Foo"
     click_on "Create Project"
     expect(page).to have_content("Foo")
-    click_on "Destroy"
+    click_on "Delete"
     expect(page).to have_no_content("Foo")
   end
 
