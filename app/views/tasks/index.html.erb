@@ -20,9 +20,10 @@
 <table class="table">
   <thead>
     <tr>
-      <th class="col-md-5"><%= link_to 'Description', project_tasks_path(task_filter: params[:task_filter], sort_by: "description") %></th>
-      <th><%= link_to 'Complete', project_tasks_path(task_filter: params[:task_filter], sort_by: "complete") %></th>
-      <th><%= link_to 'Due Date', project_tasks_path(task_filter: params[:task_filter], sort_by: "due_date") %></th>
+      <th class="col-md-4"><%= link_to 'Description', project_tasks_path(task_filter: params[:task_filter], sort_by: "description") %></th>
+      <th class="col-md-2"><%= link_to 'Complete', project_tasks_path(task_filter: params[:task_filter], sort_by: "complete") %></th>
+      <th class="col-md-3"><%= link_to 'Due Date', project_tasks_path(task_filter: params[:task_filter], sort_by: "due_date") %></th>
+      <th class="col-md-3"></th>
     </tr>
   </thead>
   <tbody>
@@ -30,7 +31,7 @@
       <% if task.upcoming? %>
       <tr class="alert alert-danger">
       <% end %>
-        <td class="col-md-5"><%= link_to task.description, project_task_path(@project, task) %>
+        <td><%= link_to task.description, project_task_path(@project, task) %>
           <span class="badge"><%= task.comments.count %></span></td>
         <td><%= task.complete %></td>
         <td><%= l task.due_date if task.due_date %></td>
