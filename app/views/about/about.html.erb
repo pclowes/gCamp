@@ -1,11 +1,24 @@
 <div>
   <h1>
-    <center>About</center>
+    About
   </h1>
+  <p style="font-size:16">
+    Get organized and increase productivity with your team
+  </p>
+  <p class="col-md-12">
+    <%=image_tag('rocket2.jpg', class: "img-responsive")%>
+  </p>
+
+</div>
+<div>
   <p>
-    <center style="font-size:16">Get organized and increase productivity with your team</center>
+    gCamp is extremely active. Check out our killer stats below!
   </p>
   <p>
-    <center><%=image_tag('rocket2.jpg', class: "img-responsive")%></center>
+    <%= pluralize(Project.count, "Project") %>,
+    <%= pluralize(Task.count, "Task") %>,
+    <%= pluralize(Membership.count, "Membership") %>,
+    <%= pluralize(User.count, "User") %>,
+    <%= pluralize(Comment.count, "Comment") %>
   </p>
 </div>

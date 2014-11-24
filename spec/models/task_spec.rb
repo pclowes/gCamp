@@ -4,11 +4,13 @@ describe Task do
   it "saves a task w/o due date" do
     task = Task.new(description: 'foo')
     task.save
+    task.valid?
     expect(task.errors[:due_date].present?).to eq(false)
   end
 
   it "does not save a task w/ due date in the past" do
     task = Task.create(description: 'foo', due_date: '11/11/2010')
+    task.valid?
     expect(task.errors[:due_date].present?).to eq(true)
   end
 
@@ -19,6 +21,7 @@ describe Task do
     travel_to 1.year.ago do
       task.description= 'foobar'
       task.due_date= Date.today
+      task.valid?
       expect(task.errors[:due_date].present?).to eq(false)
       task.save
     end
