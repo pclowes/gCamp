@@ -36,6 +36,6 @@ class MembershipsController < ApplicationController
   private
 
   def allowed_params
-    params.require(:membership).permit(:user_id, :title).mlserge(:project_id => params[:project_id])
+    params.require(:membership).permit(:user_id, :title).merge(:project_id => params[:project_id])
   end
 end
