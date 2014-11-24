@@ -75,28 +75,27 @@ feature "Tasks" do
     )
 
     visit project_tasks_path(project)
-    # within("some css selector") do
+    within(".table") do
       expect(page).to have_content("foobar")
       expect(page).to have_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
       expect(page).to have_content("false")
-    # end
+    end
 
     click_on "Edit"
     fill_in "Description", with: "oofrab"
     fill_in "Due date", with: 2.days.from_now
     page.check('Complete')
     click_on "Update Task"
-    # find all of the tasks in the above css selector
-    # assert that there is only one taks
-    # expect(page.find("some css selector some child selector").length).to eq(1)
-    expect(page).to have_no_content("foobar")
-    expect(page).to have_no_content(Date.tomorrow.strftime("%m/%d/%Y").to_s)
-    expect(page).to have_no_content("false")
-    # within("some css selector") do
+    within(".breadcrumb") do
+      click_on "Tasks"
+    end
+    click_on "All"
+    expect(Task.count).to eq(1)
+    within(".table") do
       expect(page).to have_content("oofrab")
       expect(page).to have_content(2.days.from_now.strftime("%m/%d/%Y").to_s)
       expect(page).to have_content("true")
-    # end
+    end
   end
 
   scenario "User shows a task" do
