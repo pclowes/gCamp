@@ -22,9 +22,10 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      @project.update(project_params)
-      format.html {redirect_to project_path(@project), notice: 'Project was successfully updated.'}
+    if @project.update(project_params)
+      redirect_to project_path(@project), notice: 'Project was successfully updated.'
+    else
+      render :edit
     end
   end
 
