@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @task.comments.new(comment_params)
     @comment.save
     redirect_to project_task_path(@project, @task)
   end
@@ -16,8 +16,8 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:comment, :task_id, :user_id)
-      .merge({:task_id => params[:task_id], :user_id => session[:user_id]})
+    params.require(:comment).permit(:comment)
+      .merge(user: current_user)
   end
 
 end

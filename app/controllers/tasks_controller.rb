@@ -6,9 +6,7 @@ class TasksController < ApplicationController
 
   require 'csv'
 
-  # GET /tasks
-  # GET /tasks.json
-  def index
+    def index
     if params[:task_filter] == "all"
       @tasks = @project.tasks.order(params[:sort_by]).page(params[:page])
     elsif params[:task_filter] == "incomplete"
@@ -19,24 +17,18 @@ class TasksController < ApplicationController
     csv(@tasks)
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
   def show
       @comment = @task.comments.new
       @comments = @task.comments.all
   end
 
-  # GET /tasks/new
   def new
     @task = @project.tasks.new
   end
 
-  # GET /tasks/1/edit
   def edit
   end
 
-  # POST /tasks
-  # POST /tasks.json
   def create
     @task = @project.tasks.new(task_params)
     if @task.save
@@ -47,8 +39,6 @@ class TasksController < ApplicationController
   end
 
 
-  # PATCH/PUT /tasks/1
-  # PATCH/PUT /tasks/1.json
   def update
     if @task.update(task_params)
       if params[:source]== "index"
@@ -60,15 +50,14 @@ class TasksController < ApplicationController
       render :edit
     end
   end
-  # DELETE /tasks/1
-  # DELETE /tasks/1.json
+
   def destroy
     @task.destroy
     redirect_to project_tasks_path(@project), notice: 'Task was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
   def csv(file)
     file
     respond_to do |format|
@@ -84,7 +73,6 @@ class TasksController < ApplicationController
     @task = @project.tasks.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
     params.require(:task).permit(:description, :complete, :due_date)
   end

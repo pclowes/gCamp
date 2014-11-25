@@ -18,9 +18,8 @@ class MembershipsController < ApplicationController
   end
 
   def update
-    membership = Membership.find(params[:id])
-    membership.update(allowed_params)
-    if membership.save
+    @membership = Membership.find(params[:id])
+    if membership.update(allowed_params)
       redirect_to project_memberships_path, notice: "#{membership.user.full_name} was updated successfully."
     else
       render :index
@@ -28,8 +27,7 @@ class MembershipsController < ApplicationController
   end
 
   def destroy
-    membership = Membership.find(params[:id])
-    membership.destroy
+    Membership.find(params[:id]).destroy
     redirect_to project_memberships_path, notice:  " #{membership.user.full_name} was removed successfully."
   end
 
