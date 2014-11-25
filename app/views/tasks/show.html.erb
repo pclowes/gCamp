@@ -31,7 +31,13 @@
     <% @task.comments.each do |comment| %>
     <tr>
       <td class="col-sm-3">
-        <p><%= link_to comment.user.full_name, user_path(comment.user) %></p>
+        <p>
+          <% if comment.user != nil %>
+            <%= link_to comment.user.full_name, user_path(comment.user) %>
+          <% else %>
+            <%= link_to "(deleted user)", users_path %>
+          <% end %>
+        </p>
         <p class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</p>
       </td>
       <td class="col-sm-offset-3 col-sm-9">
