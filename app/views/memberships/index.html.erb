@@ -22,7 +22,7 @@
   <%= form_for [@project, @membership] do |f| %>
     <%= f.collection_select :user_id, User.order(:first_name), :id, :full_name, {:prompt => "Please select a user..."}, {class: "dropdown form-control"} %>
     <%= f.select :title, [['Member', false],['Owner', true]],
-      {prompt: true}, {class: "dropdown-toggle form-control"} %>
+      {prompt: false}, {class: "dropdown-toggle form-control"} %>
     <%= f.submit 'Add New Member', class: "btn btn-primary form-control" %>
   <% end %>
   </div>
