@@ -4,18 +4,16 @@
     <center>gCamp</center>
   </h1>
   <p>
-    <center style="font-size:16">Your life, organized</center>
+    <center>Your life, organized</center>
   </p>
 </div>
 
-<div>
-  <div class="row">
-    <% @images.each do |display| %>
-      <div class="col-md-4">
-        <%= image_tag(display, class: "img-responsive") %>
-      </div>
-    <% end %>
-  </div>
+<div class="row">
+  <% @images.each do |display| %>
+    <div class="col-md-4">
+      <%= image_tag(display, class: "img-responsive") %>
+    </div>
+  <% end %>
 </div>
 <br/>
 <div>
