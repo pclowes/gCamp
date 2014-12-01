@@ -1,6 +1,5 @@
 class ProjectsController < ApplicationController
   before_action :require_login
-  before_action :find_project
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -18,6 +17,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     if @project.save
       redirect_to project_path(@project), notice: 'Project was successfully created.'
+      Membership.create(project_id: @project.id, user_id: current_user.id, title: "Owner")
     else
       render :new
     end
