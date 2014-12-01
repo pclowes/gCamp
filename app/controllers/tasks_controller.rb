@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :require_login
   before_action do
     @project = Project.find(params[:project_id])
   end

@@ -14,7 +14,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<%= root_path %>">gCamp</a>
+          <a class="navbar-brand" href="<%= projects_path %>">gCamp</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
@@ -42,11 +42,10 @@
         <div class="container">
           <div align="left" class="col-md-6">
             <%= link_to t(:home), root_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
-            <%= link_to t(:users), users_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
-            <%= link_to t(:projects), projects_path, {:class => ("active disabled" if current_page?('/projects'))}%> |
             <%= link_to t(:about), about_path, {:class => ("active disabled" if current_page?('/about'))}%> |
             <%= link_to t(:terms), terms_path, {:class => ("active disabled" if current_page?('/terms'))}%> |
-            <%= link_to t(:faq), faq_path, {:class => ("active disabled" if current_page?('/faq'))}%>
+            <%= link_to t(:faq), faq_path, {:class => ("active disabled" if current_page?('/faq'))}%> |
+            <%= link_to "My Projects", projects_path, {:class => ("active disabled" if current_page?('/projects'))}%>
           </div>
           <div align="right" class="col-md-6">
             <%= link_to "http://www.linkedin.com/in/peterclowes" do %>
