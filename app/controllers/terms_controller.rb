@@ -1,4 +1,4 @@
-class TermsController < ApplicationController
+class TermsController < MarketingController
   def terms
     render :terms
   end

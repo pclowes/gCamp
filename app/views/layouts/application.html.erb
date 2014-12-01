@@ -15,6 +15,21 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="<%= projects_path %>">gCamp</a>
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                My Projects
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <% @user.projects.each do |project| %>
+                  <li><a href="#"><%= link_to project.name, project %></a></li>
+                <% end %>
+                <li class="divider"></li>
+                <li><a href="#"><%= link_to "New Project", new_project_path(@user) %></a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
@@ -40,23 +55,11 @@
     </div>
       <div class="footer">
         <div class="container">
-          <div align="left" class="col-md-6">
+          <div align="center" class="col-md-12">
             <%= link_to t(:home), root_path, {:class => ("active disabled" if current_page?('/homepage'))}%> |
             <%= link_to t(:about), about_path, {:class => ("active disabled" if current_page?('/about'))}%> |
             <%= link_to t(:terms), terms_path, {:class => ("active disabled" if current_page?('/terms'))}%> |
             <%= link_to t(:faq), faq_path, {:class => ("active disabled" if current_page?('/faq'))}%> |
-            <%= link_to "My Projects", projects_path, {:class => ("active disabled" if current_page?('/projects'))}%>
-          </div>
-          <div align="right" class="col-md-6">
-            <%= link_to "http://www.linkedin.com/in/peterclowes" do %>
-              <%=image_tag('linkedin.png', width: "20em")%>
-            <% end %> |
-            <%= link_to "http://www.github.com/pclowes" do %>
-              <%=image_tag('github.png', width: "20em")%>
-            <% end %> |
-            <%= link_to "http://www.twitter.com/peterclowes" do %>
-              <%=image_tag('twitter.png', width: "20em")%>
-            <% end %>
           </div>
         </div>
       </div>
