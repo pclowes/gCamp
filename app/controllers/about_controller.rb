@@ -1,5 +1,5 @@
-class AboutController < ApplicationController
+class AboutController < MarketingController
   def about
-  render :about
+    render :about
   end
 end

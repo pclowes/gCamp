@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+  protect_from_forgery with: :exception
+
   before_action :find_projects
+  before_action :require_login
 
   def require_login
     unless current_user
@@ -7,11 +11,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  include ApplicationHelper
-  protect_from_forgery with: :exception
+  class AccessDenied < StandardError
+  end
+
+  rescue_from AccessDenied, with: :render_404
+
+  def render_404
+    render "public/404", status: :not_found, layout: false
+  end
 
   private
-  
+
   def find_projects
     @projects = Project.all
   end
