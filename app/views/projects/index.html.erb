@@ -20,18 +20,18 @@
     </tr>
   </thead>
   <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td class="col-sm-1">
-          <%= link_to project.name, project %>
-        </td>
-        <td class="col-sm-1">
-          <%= link_to project.tasks.count, project_tasks_path(project) %>
-        </td>
-        <td class="col-sm-1">
-          <%= link_to project.memberships.count, project_memberships_path(project) %>
-        </td>
-      </tr>
+    <% @user.projects.each do |project| %>
+        <tr>
+          <td class="col-sm-1">
+            <%= link_to project.name, project %>
+          </td>
+          <td class="col-sm-1">
+            <%= link_to project.tasks.count, project_tasks_path(project) %>
+          </td>
+          <td class="col-sm-1">
+            <%= link_to project.memberships.count, project_memberships_path(project) %>
+          </td>
+        </tr>
     <% end %>
   </tbody>
 </table>
