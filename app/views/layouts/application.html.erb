@@ -23,11 +23,11 @@
                   <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                  <% @user.projects.each do |project| %>
+                  <% current_user.projects.each do |project| %>
                     <li><a href="#"><%= link_to project.name, project %></a></li>
                   <% end %>
                   <li class="divider"></li>
-                  <li><a href="#"><%= link_to "New Project", new_project_path(@user) %></a></li>
+                  <li><a href="#"><%= link_to "New Project", new_project_path %></a></li>
                 </ul>
               </li>
             </ul>

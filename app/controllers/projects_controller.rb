@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :authorize, only: [:show, :edit, :update, :destroy]
 
   def index
     @projects = Project.all
@@ -48,4 +49,9 @@ class ProjectsController < ApplicationController
     def set_project
       @project = Project.find(params[:id])
     end
+
+    def authorize
+      raise AccessDenied unless current_user.projects.include?(@project)
+    end
+
 end
