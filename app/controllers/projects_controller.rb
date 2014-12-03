@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :authorize, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorize_member, only: [:show]
+  before_action :authorize_owner, only: [:edit, :update, :destroy]
   def index
     @projects = Project.all
   end
@@ -32,10 +32,16 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.destroy
-    respond_to do |format|
-      format.html {redirect_to projects_url, notice: 'Project was successfully destroyed.' }
-    end
+    #project_id has to match
+    #role = owner
+    #user_id current user
+    # memberships = @project.memberships.where(role: 'owner', user_id: current_user)
+    # if memberships.empty?
+    #   render 'public/404', status: 404
+    # else
+      @project.destroy
+      redirect_to projects_url, notice: 'Project was successfully destroyed.'
+    # end
   end
 
   def edit
@@ -50,8 +56,12 @@ class ProjectsController < ApplicationController
       @project = Project.find(params[:id])
     end
 
-    def authorize
-      raise AccessDenied unless current_user.projects.include?(@project)
+    def authorize_member
+      raise AccessDenied unless current_user.member?(@project)
+    end
+
+    def authorize_owner
+      raise AccessDenied unless current_user.owner?(@project)
     end
 
 end
