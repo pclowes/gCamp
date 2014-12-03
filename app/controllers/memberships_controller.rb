@@ -1,8 +1,9 @@
 class MembershipsController < ApplicationController
-  before_action :require_login
   before_action do
     @project = Project.find(params[:project_id])
   end
+  before_action :require_login
+  before_action :authorize
 
   def index
     @membership = Membership.new
@@ -36,5 +37,9 @@ class MembershipsController < ApplicationController
 
   def allowed_params
     params.require(:membership).permit(:user_id, :title).merge(:project_id => params[:project_id])
+  end
+
+  def authorize
+    raise AccessDenied unless current_user.projects.include?(@project)
   end
 end
