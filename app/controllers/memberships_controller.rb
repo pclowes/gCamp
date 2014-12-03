@@ -3,7 +3,8 @@ class MembershipsController < ApplicationController
     @project = Project.find(params[:project_id])
   end
   before_action :require_login
-  before_action :authorize
+  before_action :authorize_member, only: [:index]
+  before_action :authorize_owner, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @membership = Membership.new
@@ -39,7 +40,11 @@ class MembershipsController < ApplicationController
     params.require(:membership).permit(:user_id, :title).merge(:project_id => params[:project_id])
   end
 
-  def authorize
-    raise AccessDenied unless current_user.projects.include?(@project)
+  def authorize_member
+    raise AccessDenied unless current_user.member?(@project)
+  end
+
+  def authorize_owner
+    raise AccessDenied unless current_user.owner?(@project)
   end
 end

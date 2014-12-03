@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :authorize_member, only: [:show]
   before_action :authorize_owner, only: [:edit, :update, :destroy]
   def index
-    @projects = Project.all
+    @projects = current_user.projects
   end
 
   def show

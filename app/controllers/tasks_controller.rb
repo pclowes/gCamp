@@ -4,7 +4,7 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
   end
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :authorize
+  before_action :authorize_member
 
   require 'csv'
 
@@ -79,7 +79,8 @@ class TasksController < ApplicationController
     params.require(:task).permit(:description, :complete, :due_date)
   end
 
-  def authorize
-    raise AccessDenied unless current_user.projects.include?(@project)
+  def authorize_member
+    raise AccessDenied unless current_user.member?(@project)
   end
+
 end
