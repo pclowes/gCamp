@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @user.projects.each do |project| %>
+    <% current_user.projects.each do |project| %>
         <tr>
           <td class="col-sm-1">
             <%= link_to project.name, project %>

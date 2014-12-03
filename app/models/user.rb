@@ -17,4 +17,7 @@ class User < ActiveRecord::Base
   def owner?(project)
     memberships.where(project_id: project, title:"Owner").present?
   end
+
+  def self?
+  end
 end
