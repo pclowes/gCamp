@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :require_login
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user, only: [:edit, :update, :destroy]
-  before_action :authorize_admin, only: [:index]
   def index
     @users = User.all
   end
@@ -50,11 +49,10 @@ class UsersController < ApplicationController
   end
 
   def authorize_user
-    raise AccessDenied unless current_user == @user || current_user.admin?
+    raise AccessDenied unless current_user == @user
   end
 
   def authorize_admin
     raise AccessDenied unless current_user.admin?
   end
-
 end

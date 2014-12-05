@@ -17,10 +17,12 @@
         <%= @user.last_name %>
     </div>
   </div>
-  <div class="form-group">
-    <label class="col-sm-2 text-right">Email</label>
-    <div class="col-sm-4">
-        <%= mail_to @user.email %>
+  <% if current_user.admin? || current_user == @user || current_user.coworker_of?(@user) %>
+    <div class="form-group">
+      <label class="col-sm-2 text-right">Email</label>
+      <div class="col-sm-4">
+          <%= mail_to @user.email %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>

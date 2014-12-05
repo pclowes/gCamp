@@ -21,7 +21,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-
   class AccessDenied < StandardError
   end
 
