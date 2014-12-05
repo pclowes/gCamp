@@ -12,7 +12,7 @@ end
 
 
 #for debugging
-gem 'pry'
+gem 'pry-rails'
 #for pagination
 gem "kaminari"
 

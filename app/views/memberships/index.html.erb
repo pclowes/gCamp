@@ -15,7 +15,6 @@
     <%= render 'shared/errors', record: @membership %>
   </div>
 </div>
-
 <% if current_user.owner?(@project) %>
   <div class="well form-inline col col-sm-8">
     <div class="form-group">
@@ -80,6 +79,9 @@
           <th>
             Title
           </th>
+          <th>
+            Destroy
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -92,6 +94,11 @@
           <td>
             <%= membership.title %>
           </td>
+          <% if current_user == membership.user %>
+            <td>
+              <%= link_to "", project_membership_path(@project, membership), method: :delete, data: { confirm: 'Are you sure?'}, class: "glyphicon glyphicon-remove" %>
+            </td>
+          <% end %>
         </tr>
         <% end %>
         <% end %>
