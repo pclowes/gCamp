@@ -1,6 +1,6 @@
 <div class="page-header">
   <span class="h1"><%= "#{@user.first_name} #{@user.last_name}" %></span>
-    <% if current_user == @user %>
+    <% if current_user == @user || current_user.admin? %>
       <%= link_to 'Edit', edit_user_path, class: "btn btn-info pull-right" %>
     <% end %>
 </div>
