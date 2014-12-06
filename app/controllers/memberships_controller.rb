@@ -4,8 +4,8 @@ class MembershipsController < ApplicationController
   end
   before_action :require_login
   before_action :authorize_member, only: [:index]
-  before_action :authorize_owner, only: [:new, :create, :edit, :update, :destroy]
-
+  before_action :authorize_owner, only: [:new, :create, :edit, :update]
+  before_action :authorize_destroy, only: [:destroy]
   def index
     @membership = Membership.new
     @memberships = @project.memberships
@@ -50,5 +50,10 @@ class MembershipsController < ApplicationController
 
   def authorize_owner
     raise AccessDenied unless current_user.owner?(@project)
+  end
+
+  def authorize_destroy
+    membership = Membership.find(params[:id])
+    raise AccessDenied unless current_user.admin? || current_user.owner?(@project)|| current_user == membership.user
   end
 end
