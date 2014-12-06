@@ -1,3 +1,8 @@
+<% if @destroy_membership_error %>
+  <div style="color:red">
+    <%= @destroy_membership_error %>
+  </div>
+<% end %>
 <% if notice %>
   <p align="center" class="alert alert-success" id="notice"><%= notice %></p>
 <% end %>
