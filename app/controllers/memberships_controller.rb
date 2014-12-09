@@ -27,7 +27,7 @@ class MembershipsController < ApplicationController
     if membership.update(allowed_params)
       redirect_to project_memberships_path, notice: "#{membership.user.full_name} was updated successfully."
     else
-      render :index
+      redirect_to project_memberships_path, notice:  "Can't change the last owner of a project to a member"
     end
   end
 
@@ -54,7 +54,7 @@ class MembershipsController < ApplicationController
   end
 
   def authorize_owner
-    raise AccessDenied unless current_user.owner?(@project)
+    raise AccessDenied unless current_user.owner?(@project) || current_user.admin?
   end
 
   def authorize_destroy

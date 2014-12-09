@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :authorize_member, only: [:show]
   before_action :authorize_owner, only: [:edit, :update, :destroy]
   def index
-    @projects = current_user.projects
+    @projects = currenct_user.projects
   end
 
   def show
@@ -32,16 +32,8 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    #project_id has to match
-    #role = owner
-    #user_id current user
-    # memberships = @project.memberships.where(role: 'owner', user_id: current_user)
-    # if memberships.empty?
-    #   render 'public/404', status: 404
-    # else
-      @project.destroy
-      redirect_to projects_url, notice: 'Project was successfully destroyed.'
-    # end
+    @project.destroy
+    redirect_to projects_url, notice: 'Project was successfully destroyed.'
   end
 
   def edit
@@ -57,11 +49,11 @@ class ProjectsController < ApplicationController
     end
 
     def authorize_member
-      raise AccessDenied unless current_user.member?(@project)
+      raise AccessDenied unless current_user.member?(@project) || current_user.admin?
     end
 
     def authorize_owner
-      raise AccessDenied unless current_user.owner?(@project)
+      raise AccessDenied unless current_user.owner?(@project) || current_user.admin?
     end
 
 end
