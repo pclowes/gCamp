@@ -2,6 +2,30 @@ require 'rails_helper'
 
 describe ProjectsController do
 
+
+  describe "#index" do
+    it "does not allow visitors visit index page and redirects to sign-in page" do
+      get :index
+      expect(response.status).to eq(302)
+      expect(response).to redirect_to(signin_path)
+      expect(flash[:notice]).to eq("You must be logged in to access that action")
+    end
+
+    it "does allow logged-in users to visit index page" do
+      @user = User.create!(
+      first_name: "Joe",
+      last_name: "Smith",
+      email: "joe@example.com",
+      password: "test",
+      admin: false
+      )
+      session[:user_id] = @user.id
+      get :index
+      expect(response.status).to eq(200)
+    end
+  end
+
+
   describe "#show" do
 
     before do
@@ -24,7 +48,7 @@ describe ProjectsController do
       expect(flash[:notice]).to eq("You must be logged in to access that action")
     end
 
-    it "does not allow signed-in users to visit show page" do
+    it "does not allow signed-in non-member users to visit show page" do
       session[:user_id] = @user.id
       get :show, id: @project.id
       expect(response.status).to eq(404)
@@ -52,7 +76,7 @@ describe ProjectsController do
       expect(response.status).to eq(200)
     end
 
-    it "does allow admins to visit show page" do
+    it "does allow admins to visit show page even if they are non-members" do
       @user = User.create!(
       first_name: "Jane",
       last_name: "Doe",
