@@ -3,7 +3,9 @@
 <% end %>
 <div class="page-header">
   <span class="h1">Users</span>
-  <%= link_to 'Create User', new_user_path, class: "btn btn-info pull-right" %>
+  <% if current_user.admin? %>
+    <%= link_to 'Create User', new_user_path, class: "btn btn-info pull-right" %>
+  <% end %>
 </div>
 <table class="table">
   <thead>
