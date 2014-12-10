@@ -34,7 +34,7 @@ class TasksController < ApplicationController
   def create
     @task = @project.tasks.new(task_params)
     if @task.save
-      redirect_to project_task_path(@project, @task), notice: 'Task was successfully created.'
+      redirect_to project_tasks_path(@project), notice: 'Task was successfully created.'
     else
       render :new
     end
@@ -80,7 +80,7 @@ class TasksController < ApplicationController
   end
 
   def authorize_member
-    raise AccessDenied unless current_user.member?(@project)
+    raise AccessDenied unless current_user.member?(@project) || current_user.admin?
   end
 
 end
