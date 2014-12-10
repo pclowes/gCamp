@@ -36,8 +36,16 @@ describe ProjectsController do
     )
 
     @project = Project.create!(
-    name: "Acme"
+    name: "Project Name"
     )
+
+    @updated_project = {
+      project: {
+        name: "Updated Project Name"
+      },
+      id: @project.id
+    }
+
     @projects = Project.all
 
     Membership.create!(
@@ -57,16 +65,10 @@ describe ProjectsController do
 
   describe "#index" do
 
-    it "does not allow visitors visit index page and redirects to sign-in page" do
-      get :index
-      expect(response).to redirect_to(signin_path)
-      expect(flash[:notice]).to eq("You must be logged in to access that action")
-    end
-
-    it "does allow logged-in users to visit index page" do
+    it "renders the index view for logged-in users" do
       session[:user_id] = @user.id
       get :index
-      expect(response.status).to eq(200)
+      expect(response.status).to render_template('index')
     end
 
   end
@@ -74,15 +76,18 @@ describe ProjectsController do
 
   describe "#create" do
 
-    it "does not allow visitors to create projects and redirects to sign-in page" do
-      get :create, name: "Test name"
-      expect(response).to redirect_to(signin_path)
+    before do
+      session[:user_id] = @user.id
     end
 
-    it "does allow signed-in users to create projects" do
-      session[:user_id] = @user.id
+    it "redirects to project tasks when signed-in users successfully save" do
       post :create, :project => {name: "Test name"}
       expect(response).to redirect_to(project_tasks_path(@projects.last))
+    end
+
+    it "renders new view on unsuccessful save" do
+      post :create, :project => {name: ""}
+      expect(response).to render_template('new')
     end
 
   end
@@ -90,44 +95,45 @@ describe ProjectsController do
 
   describe "#new" do
 
+    it "renders the new project view" do
+      session[:user_id] = @user.id
+      get :new
+      expect(response).to render_template('new')
+    end
+
   end
 
 
   describe "#edit" do
 
-    it "does not allow visitors to edit and redirects to sign-in page" do
-      get :edit, id: @project.id
-      expect(response.status).to redirect_to(signin_path)
+    context "invalid attempts to edit" do
+      it "renders 404 if user is not a member" do
+        session[:user_id] = @user.id
+        get :edit, id: @project.id
+        expect(response.status).to eq(404)
+      end
+
+      it "renders 404 if user is not a owner" do
+        session[:user_id] = @member_user.id
+        get :edit, id: @project.id
+        expect(response.status).to eq(404)
+      end
     end
 
-    it "does not allow non-members to edit" do
-      session[:user_id] = @user.id
-      name = @projects.name
-      get :edit, id: @project.id
-      expect(response.status).to eq(404)
-      expect(name).to eq(@projects.name)
-    end
+    context "valid attempts to edit" do
+      it "renders edit view if user is an owner" do
+        session[:user_id] = @owner_user.id
+        name = Project.name
+        get :edit, id: @project.id
+        expect(response).to render_template('edit')
+      end
 
-    it "does not allow project-members to edit" do
-      session[:user_id] = @member_user.id
-      name = Project.name
-      get :edit, id: @project.id
-      expect(response.status).to eq(404)
-      expect(name).to eq(@projects.name)
-    end
-
-    it "allows project owners to edit" do
-      session[:user_id] = @owner_user.id
-      name = Project.name
-      get :edit, id: @project.id
-      expect(response.status).to eq(200)
-    end
-
-    it "allows admins to edit" do
-      session[:user_id] = @admin_user.id
-      name = @projects.name
-      get :edit, id: @project.id
-      expect(response.status).to eq(200)
+      it "renders edit view if user is an admin" do
+        session[:user_id] = @admin_user.id
+        name = @projects.name
+        get :edit, id: @project.id
+        expect(response).to render_template('edit')
+      end
     end
 
   end
@@ -135,33 +141,32 @@ describe ProjectsController do
 
   describe "#show" do
 
-    it "does not allow visitors visit show page and redirects to sign-in page" do
-      get :show, id: @project.id
-      expect(response).to redirect_to(signin_path)
+    context "invalid attempts to view" do
+      it "renders 404 if user is not associated" do
+        session[:user_id] = @user.id
+        get :show, id: @project.id
+        expect(response.status).to eq(404)
+      end
     end
 
-    it "does not allow signed-in non-member users to visit show page" do
-      session[:user_id] = @user.id
-      get :show, id: @project.id
-      expect(response.status).to eq(404)
-    end
+    context "valid attempts to view" do
+      it "renders the show view if user is a member" do
+        session[:user_id] = @member_user.id
+        get :show, id: @project.id
+        expect(response).to render_template('show')
+      end
 
-    it "does allow project members to visit show page" do
-      session[:user_id] = @member_user.id
-      get :show, id: @project.id
-      expect(response.status).to eq(200)
-    end
+      it "renders the show view if user is an owner" do
+        session[:user_id] = @owner_user.id
+        get :show, id: @project.id
+        expect(response).to render_template('show')
+      end
 
-    it "does allow project owners to visit show page" do
-      session[:user_id] = @owner_user.id
-      get :show, id: @project.id
-      expect(response.status).to eq(200)
-    end
-
-    it "does allow admins to visit show page even if they are non-members" do
-      session[:user_id] = @admin_user.id
-      get :show, id: @project.id
-      expect(response.status).to eq(200)
+      it "renders the show view if user is an admin" do
+        session[:user_id] = @admin_user.id
+        get :show, id: @project.id
+        expect(response).to render_template('show')
+      end
     end
 
   end
@@ -169,45 +174,88 @@ describe ProjectsController do
 
   describe "#update" do
 
+    context 'invalid attempts to update' do
+      it 'renders 404 if user is not associated' do
+        session[:user_id] = @user
+        put :update, @updated_project
+        expect(response.status).to eq(404)
+      end
+
+      it 'renders 404 if user is a member' do
+        session[:user_id] = @member_user
+        put :update, @updated_project
+        expect(response.status).to eq(404)
+      end
+    end
+
+    context 'valid attempts to update' do
+      it 'renders edit view on unsuccessful update' do
+        session[:user_id] = @owner_user
+        updated_project = {
+          project: {
+            name: ''
+          },
+          id: @project
+        }
+        put :update, updated_project
+        expect(response).to render_template('edit')
+      end
+
+      it 'redirects to project path on successful update' do
+        session[:user_id] = @owner_user
+        put :update, @updated_project
+        expect(response).to redirect_to(project_path(Project.first))
+      end
+
+      it 'redirects to project path if user is an admin' do
+        session[:user_id] = @admin_user
+        put :update, @updated_project
+        expect(response).to redirect_to(project_path(Project.first))
+      end
+    end
+
   end
 
 
   describe "#destroy" do
 
-    it "does not allow visitors to delete and redirects to sign-in page" do
-      get :destroy, id: @project.id
-      expect(response.status).to redirect_to(signin_path)
+    context "invalid attempts to destroy" do
+      it "renders 404 if user is not associated" do
+        session[:user_id] = @user.id
+        count = @projects.count
+        delete :destroy, id: @project.id
+        expect(response.status).to eq(404)
+        expect(count).to eq(@projects.count)
+      end
+
+      it "renders 404 if user is a member" do
+        session[:user_id] = @member_user.id
+        count = Project.count
+        delete :destroy, id: @project.id
+        expect(response.status).to eq(404)
+        expect(count).to eq(@projects.count)
+      end
     end
 
-    it "does not allow non-members to delete" do
-      session[:user_id] = @user.id
-      count = @projects.count
-      get :destroy, id: @project.id
-      expect(response.status).to eq(404)
-      expect(count).to eq(@projects.count)
+    context "valid attempts to destroy" do
+      it "redirects to projects path if user is an owner" do
+        session[:user_id] = @owner_user.id
+        count = Project.count
+        delete :destroy, id: @project.id
+        expect(@projects.count).to eq(count -1)
+        expect(response).to redirect_to(projects_path)
+      end
+
+      it "redirects to projects path if user is an admin" do
+        session[:user_id] = @admin_user.id
+        count = @projects.count
+        delete :destroy, id: @project.id
+        expect(@projects.count).to eq(count -1)
+        expect(response).to redirect_to(projects_path)
+      end
     end
 
-    it "does not allow project-members to delete" do
-      session[:user_id] = @member_user.id
-      count = Project.count
-      get :destroy, id: @project.id
-      expect(response.status).to eq(404)
-      expect(count).to eq(@projects.count)
-    end
-
-    it "allows project owners to delete" do
-      session[:user_id] = @owner_user.id
-      count = Project.count
-      get :destroy, id: @project.id
-      expect(@projects.count).to eq(count -1)
-    end
-
-    it "allows admins to delete" do
-      session[:user_id] = @admin_user.id
-      count = @projects.count
-      get :destroy, id: @project.id
-      expect(@projects.count).to eq(count -1)
-    end
   end
+
 
 end
