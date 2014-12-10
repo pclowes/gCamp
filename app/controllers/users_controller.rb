@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_login
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:edit, :destroy]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
   before_action :authorize_admin, only: [:new, :create]
 
   def index
@@ -36,8 +36,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+    if current_user.admin?
+      @user.destroy
+      redirect_to users_path, notice: 'User was successfully destroyed.'
+    else
+      @user.destroy
+      redirect_to signin_path, notice: 'User was successfully destroyed.'
+    end
   end
 
   private

@@ -15,6 +15,7 @@ describe UsersController do
     @admin = create_user(admin: true)
   end
 
+
   describe '#index' do
 
     it "renders index if user is logged in" do
@@ -24,6 +25,7 @@ describe UsersController do
     end
 
   end
+  
 
   describe '#create' do
 
@@ -133,10 +135,63 @@ describe UsersController do
 
 
   describe '#update' do
+    context 'invalid update attempts' do
+      it "renders 404 if user attempts to update another user" do
+        session[:user_id] = @user.id
+        user = {
+          user: {
+            first_name: 'different',
+            last_name: 'different',
+            email: @user.email,
+          },
+          id: @admin.id
+        }
+        put :update, user
+        expect(response.status).to eq(404)
+      end
+    end
+
+    context 'valid update attempts' do
+      it 'redirects to users_path if user updates' do
+        session[:user_id] = @user.id
+        put :update, @updated_user
+        expect(response).to redirect_to(users_path)
+      end
+
+      it 'redirects to users_path if admin updates' do
+        session[:user_id] = @admin.id
+        put :update, @updated_user
+        expect(response).to redirect_to(users_path)
+      end
+    end
   end
 
 
   describe '#destroy' do
+
+    context 'invalid destroy attempts' do
+      it 'renders 404 if user is not an admin and attempts to destroy another user' do
+        @other = create_user
+        session[:user_id] = @user.id
+        delete :destroy, id: @other.id
+        expect(response.status).to eq(404)
+      end
+    end
+
+    context 'valid destroy attempts' do
+      it 'redirects to signin_path if user destroys themselves' do
+        session[:user_id] = @user.id
+        delete :destroy, id: @user.id
+        expect(response).to redirect_to(signin_path)
+      end
+
+      it 'redirects to users_path if admin destroys a user' do
+        session[:user_id] = @admin.id
+        delete :destroy, id: @user.id
+        expect(response).to redirect_to(users_path)
+      end
+    end
+
   end
 
 
