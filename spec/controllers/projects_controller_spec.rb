@@ -2,6 +2,72 @@ require 'rails_helper'
 
 describe ProjectsController do
 
+  describe "#show" do
+
+    before do
+      @user = User.create!(
+      first_name: "Joe",
+      last_name: "Smith",
+      email: "joe@example.com",
+      password: "test",
+      admin: false
+      )
+      @project = Project.create!(
+      name: "Acme"
+      )
+    end
+
+    it "does not allow visitors visit show page and redirects to sign-in page" do
+      get :show, id: @project.id
+      expect(response.status).to eq(302)
+      expect(response).to redirect_to(signin_path)
+      expect(flash[:notice]).to eq("You must be logged in to access that action")
+    end
+
+    it "does not allow signed-in users to visit show page" do
+      session[:user_id] = @user.id
+      get :show, id: @project.id
+      expect(response.status).to eq(404)
+    end
+
+    it "does allow project members to visit show page" do
+      Membership.create!(
+      user: @user,
+      project: @project,
+      title: 'Member'
+      )
+      session[:user_id] = @user.id
+      get :show, id: @project.id
+      expect(response.status).to eq(200)
+    end
+
+    it "does allow project owners to visit show page" do
+      Membership.create!(
+      user: @user,
+      project: @project,
+      title: 'Owner'
+      )
+      session[:user_id] = @user.id
+      get :show, id: @project.id
+      expect(response.status).to eq(200)
+    end
+
+    it "does allow admins to visit show page" do
+      @user = User.create!(
+      first_name: "Jane",
+      last_name: "Doe",
+      email: "jane@example.com",
+      password: "test",
+      admin: true
+      )
+      session[:user_id] = @user.id
+      get :show, id: @project.id
+      expect(response.status).to eq(200)
+    end
+
+  end
+
+
   describe "#create" do
 
     before do
@@ -29,6 +95,7 @@ describe ProjectsController do
     end
 
   end
+
 
   describe "#edit" do
 
@@ -104,6 +171,7 @@ describe ProjectsController do
       expect(response.status).to eq(200)
     end
   end
+
 
   describe "#destroy" do
 
