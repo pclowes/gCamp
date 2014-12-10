@@ -8,9 +8,8 @@ describe ApplicationController do
     end
   end
 
-  it "redirects when user are not logged in" do
+  it "redirects visitors to signin path" do
     get :index
-
     expect(response).to redirect_to(signin_path)
   end
 
