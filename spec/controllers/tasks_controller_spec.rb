@@ -24,6 +24,7 @@ describe TasksController do
   end
 
   describe '#index' do
+    
     context 'invalid access attempts' do
       it 'renders 404 for non members' do
         session[:user_id] = @other.id
@@ -33,24 +34,13 @@ describe TasksController do
     end
 
     context 'valid access attempts' do
-      it 'renders index for members' do
+      it 'renders index view for members' do
         session[:user_id] = @user.id
         get :index, project_id: @project.id
         expect(response).to render_template('index')
       end
-
-      it 'renders index for owners' do
-        session[:user_id] = @owner.id
-        get :index, project_id: @project.id
-        expect(response).to render_template('index')
-      end
-
-      it 'renders index for admins' do
-        session[:user_id] = @admin.id
-        get :index, project_id: @project.id
-        expect(response).to render_template('index')
-      end
     end
+
   end
 
 
@@ -64,24 +54,13 @@ describe TasksController do
     end
 
     context 'valid access attempts' do
-      it 'renders show for members' do
+      it 'renders show view for members' do
         session[:user_id] = @user.id
         get :show, project_id: @project.id, id: @task.id
         expect(response).to render_template('show')
       end
-
-      it 'renders show for owners' do
-        session[:user_id] = @owner.id
-        get :show, project_id: @project.id, id: @task.id
-        expect(response).to render_template('show')
-      end
-
-      it 'renders show for admins' do
-        session[:user_id] = @admin.id
-        get :show, project_id: @project.id, id: @task.id
-        expect(response).to render_template('show')
-      end
     end
+
   end
 
 
@@ -95,24 +74,13 @@ describe TasksController do
     end
 
     context 'valid access attempts' do
-      it 'renders new for members' do
+      it 'renders new view for members' do
         session[:user_id] = @user.id
         get :new, project_id: @project.id
         expect(response).to render_template('new')
       end
-
-      it 'renders new for owners' do
-        session[:user_id] = @owner.id
-        get :new, project_id: @project.id
-        expect(response).to render_template('new')
-      end
-
-      it 'renders new for admins' do
-        session[:user_id] = @admin.id
-        get :new, project_id: @project.id
-        expect(response).to render_template('new')
-      end
     end
+
   end
 
 
@@ -138,20 +106,8 @@ describe TasksController do
     end
 
     context 'valid access attempts' do
-      it 'renders new for members on unsuccessful save' do
+      it 'renders new view for members on unsuccessful save' do
         session[:user_id] = @user.id
-        post :create, project_id: @project.id, task: @bad_task
-        expect(response).to render_template('new')
-      end
-
-      it 'renders new for owners on unsuccessful save' do
-        session[:user_id] = @owner.id
-        post :create, project_id: @project.id, task: @bad_task
-        expect(response).to render_template('new')
-      end
-
-      it 'renders new for admins on unsuccessful save' do
-        session[:user_id] = @admin.id
         post :create, project_id: @project.id, task: @bad_task
         expect(response).to render_template('new')
       end
@@ -161,24 +117,13 @@ describe TasksController do
         post :create, project_id: @project.id, task: @good_task
         expect(response).to redirect_to(project_tasks_path(@project))
       end
-
-      it 'redirect to project tasks for owners on successful save' do
-        session[:user_id] = @owner.id
-        post :create, project_id: @project.id, task: @good_task
-        expect(response).to redirect_to(project_tasks_path(@project))
-      end
-
-      it 'redirect to project tasks for admins on successful save' do
-        session[:user_id] = @admin.id
-        get :create, project_id: @project.id, task: @good_task
-        expect(response).to redirect_to(project_tasks_path(@project))
-      end
     end
 
   end
 
 
   describe '#edit' do
+
     context 'invalid access attempts' do
       it 'renders 404 for non members' do
         session[:user_id] = @other.id
@@ -188,24 +133,13 @@ describe TasksController do
     end
 
     context 'valid access attempts' do
-      it 'renders edit for members' do
+      it 'renders edit view for members' do
         session[:user_id] = @user.id
         get :edit, project_id: @project.id, id: @task.id
         expect(response).to render_template('edit')
       end
-
-      it 'renders edit for owners' do
-        session[:user_id] = @owner.id
-        get :edit, project_id: @project.id, id: @task.id
-        expect(response).to render_template('edit')
-      end
-
-      it 'renders edit for admins' do
-        session[:user_id] = @admin.id
-        get :edit, project_id: @project.id, id: @task.id
-        expect(response).to render_template('edit')
-      end
     end
+
   end
 
 
@@ -238,28 +172,18 @@ describe TasksController do
         expect(response).to render_template('edit')
       end
 
-      it 'redirect to project tasks for members on successful save' do
+      it 'redirect to project tasks on successful save' do
         session[:user_id] = @user.id
         put :update, project_id: @project.id, id: @task.id, task: {description: 'flarp'}
         expect(response).to redirect_to(project_task_path(@project, @task))
       end
 
-      it 'redirect to project tasks for owners on successful save' do
-        session[:user_id] = @owner.id
-        put :update, project_id: @project.id, id: @task.id, task: {description: 'flarp'}
-        expect(response).to redirect_to(project_task_path(@project, @task))
-      end
-
-      it 'redirect to project tasks for admins on successful save' do
-        session[:user_id] = @admin.id
-        put :update, project_id: @project.id, id: @task.id, task: {description: 'flarp'}
-        expect(response).to redirect_to(project_task_path(@project, @task))
-      end
     end
   end
 
 
   describe '#destroy' do
+
     context 'invalid access attempts' do
       it 'renders 404 for non members' do
         session[:user_id] = @other.id
@@ -269,24 +193,13 @@ describe TasksController do
     end
 
     context 'valid access attempts' do
-      it 'renders edit for members' do
+      it 'renders edit view' do
         session[:user_id] = @user.id
         delete :destroy, project_id: @project.id, id: @task.id
         expect(response).to redirect_to(project_tasks_path(@project))
       end
-
-      it 'renders edit for owners' do
-        session[:user_id] = @owner.id
-        delete :destroy, project_id: @project.id, id: @task.id
-        expect(response).to redirect_to(project_tasks_path(@project))
-      end
-
-      it 'renders edit for admins' do
-        session[:user_id] = @admin.id
-        delete :destroy, project_id: @project.id, id: @task.id
-        expect(response).to redirect_to(project_tasks_path(@project))
-      end
     end
+
   end
 
 end
