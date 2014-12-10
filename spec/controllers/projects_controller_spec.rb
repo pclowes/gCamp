@@ -2,81 +2,33 @@ require 'rails_helper'
 
 describe ProjectsController do
 
-  describe "#destroy" do
+  describe "#create" do
 
     before do
       @user = User.create!(
-        first_name: "Joe",
-        last_name: "Smith",
-        email: "joe@example.com",
-        password: "test",
-        admin: false
-      )
-      @project = Project.create!(
-        name: "Acme"
-      )
-      @projects = Project.all
-    end
-
-    it "does not allow visitors to delete and redirects to sign-in page" do
-      get :destroy, id: @project.id
-      expect(response.status).to redirect_to(signin_path)
-    end
-
-    it "does not allow non-members to delete" do
-      session[:user_id] = @user.id
-      count = @projects.count
-
-      get :destroy, id: @project.id
-
-      expect(response.status).to eq(404)
-      expect(count).to eq(@projects.count)
-    end
-
-    it "does not allow project-members to delete" do
-      session[:user_id] = @user.id
-      count = Project.count
-
-      get :destroy, id: @project.id
-
-      expect(response.status).to eq(404)
-      expect(count).to eq(@projects.count)
-    end
-
-    it "allows project owners to delete" do
-      Membership.create!(
-        user: @user,
-        project: @project,
-        title: 'Owner'
-      )
-      session[:user_id] = @user.id
-      count = Project.count
-
-      get :destroy, id: @project.id
-      expect(@projects.count).to eq(count -1)
-    end
-
-    it "allows admins to delete" do
-      @user = User.create!(
-      first_name: "Jane",
-      last_name: "Doe",
-      email: "Jane@example.com",
+      first_name: "Joe",
+      last_name: "Smith",
+      email: "joe@example.com",
       password: "test",
-      admin: true
+      admin: false
       )
-      Membership.create!(
-      user: @user,
-      project: @project,
-      title: 'Owner'
-      )
-      session[:user_id] = @user.id
-      count = @projects.count
-
-      get :destroy, id: @project.id
-      expect(@projects.count).to eq(count -1)
     end
-  end
 
+    it "does not allow visitors to create and redirects to sign-in page" do
+      get :create, name: "Test name"
+      expect(response.status).to eq(302)
+      expect(response).to redirect_to(signin_path)
+      expect(flash[:notice]).to eq("You must be logged in to access that action")
+    end
+
+    it "does allow signed-in users to create" do
+      session[:user_id] = @user.id
+      post :create, :project => {name: "Test name"}
+      expect(response.status).to eq(302)
+      expect(flash[:notice]).to eq("Project was successfully created.")
+    end
+
+  end
 
   describe "#edit" do
 
@@ -150,6 +102,81 @@ describe ProjectsController do
 
       get :edit, id: @project.id
       expect(response.status).to eq(200)
+    end
+  end
+
+  describe "#destroy" do
+
+    before do
+      @user = User.create!(
+        first_name: "Joe",
+        last_name: "Smith",
+        email: "joe@example.com",
+        password: "test",
+        admin: false
+      )
+      @project = Project.create!(
+        name: "Acme"
+      )
+      @projects = Project.all
+    end
+
+    it "does not allow visitors to delete and redirects to sign-in page" do
+      get :destroy, id: @project.id
+      expect(response.status).to redirect_to(signin_path)
+    end
+
+    it "does not allow non-members to delete" do
+      session[:user_id] = @user.id
+      count = @projects.count
+
+      get :destroy, id: @project.id
+
+      expect(response.status).to eq(404)
+      expect(count).to eq(@projects.count)
+    end
+
+    it "does not allow project-members to delete" do
+      session[:user_id] = @user.id
+      count = Project.count
+
+      get :destroy, id: @project.id
+
+      expect(response.status).to eq(404)
+      expect(count).to eq(@projects.count)
+    end
+
+    it "allows project owners to delete" do
+      Membership.create!(
+        user: @user,
+        project: @project,
+        title: 'Owner'
+      )
+      session[:user_id] = @user.id
+      count = Project.count
+
+      get :destroy, id: @project.id
+      expect(@projects.count).to eq(count -1)
+    end
+
+    it "allows admins to delete" do
+      @user = User.create!(
+      first_name: "Jane",
+      last_name: "Doe",
+      email: "Jane@example.com",
+      password: "test",
+      admin: true
+      )
+      Membership.create!(
+      user: @user,
+      project: @project,
+      title: 'Owner'
+      )
+      session[:user_id] = @user.id
+      count = @projects.count
+
+      get :destroy, id: @project.id
+      expect(@projects.count).to eq(count -1)
     end
   end
 
