@@ -3,63 +3,28 @@ require 'rails_helper'
 describe ProjectsController do
 
   before do
-    @user = User.create!(
-    first_name: "Jill",
-    last_name: "Smith",
-    email: "jill@example.com",
-    password: "test",
-    admin: false
-    )
-
-    @member_user = User.create!(
-    first_name: "Joe",
-    last_name: "Smith",
-    email: "joe@example.com",
-    password: "test",
-    admin: false
-    )
-
-    @owner_user = User.create!(
-    first_name: "Jake",
-    last_name: "Smith",
-    email: "jake@example.com",
-    password: "test",
-    admin: false
-    )
-
-    @admin_user = User.create!(
-    first_name: "Jane",
-    last_name: "Doe",
-    email: "Jane@example.com",
-    password: "test",
-    admin: true
-    )
-
-    @project = Project.create!(
-    name: "Project Name"
-    )
-
+    @user = create_user
+    @member = create_user
+    @owner = create_user
+    @admin = create_user(admin: true)
+    @project = create_project
     @updated_project = {
       project: {
-        name: "Updated Project Name"
+        name: 'Updated Project Name'
       },
       id: @project.id
     }
-
     @projects = Project.all
-
-    Membership.create!(
-    user: @owner_user,
-    project: @project,
-    title: 'Owner'
-    )
-
-    Membership.create!(
-    user: @member_user,
+    @membership = create_membership(
+    user: @member,
     project: @project,
     title: 'Member'
     )
-
+    @ownership = create_membership(
+    user: @owner,
+    project: @project,
+    title: 'Owner'
+    )
   end
 
 
@@ -114,7 +79,7 @@ describe ProjectsController do
       end
 
       it "renders 404 if user is not a owner" do
-        session[:user_id] = @member_user.id
+        session[:user_id] = @member.id
         get :edit, id: @project.id
         expect(response.status).to eq(404)
       end
@@ -122,14 +87,14 @@ describe ProjectsController do
 
     context "valid attempts to edit" do
       it "renders edit view if user is an owner" do
-        session[:user_id] = @owner_user.id
+        session[:user_id] = @owner.id
         name = Project.name
         get :edit, id: @project.id
         expect(response).to render_template('edit')
       end
 
       it "renders edit view if user is an admin" do
-        session[:user_id] = @admin_user.id
+        session[:user_id] = @admin.id
         name = @projects.name
         get :edit, id: @project.id
         expect(response).to render_template('edit')
@@ -151,19 +116,19 @@ describe ProjectsController do
 
     context "valid attempts to view" do
       it "renders the show view if user is a member" do
-        session[:user_id] = @member_user.id
+        session[:user_id] = @member.id
         get :show, id: @project.id
         expect(response).to render_template('show')
       end
 
       it "renders the show view if user is an owner" do
-        session[:user_id] = @owner_user.id
+        session[:user_id] = @owner.id
         get :show, id: @project.id
         expect(response).to render_template('show')
       end
 
       it "renders the show view if user is an admin" do
-        session[:user_id] = @admin_user.id
+        session[:user_id] = @admin.id
         get :show, id: @project.id
         expect(response).to render_template('show')
       end
@@ -182,7 +147,7 @@ describe ProjectsController do
       end
 
       it 'renders 404 if user is a member' do
-        session[:user_id] = @member_user
+        session[:user_id] = @member
         put :update, @updated_project
         expect(response.status).to eq(404)
       end
@@ -190,7 +155,7 @@ describe ProjectsController do
 
     context 'valid attempts to update' do
       it 'renders edit view on unsuccessful update' do
-        session[:user_id] = @owner_user
+        session[:user_id] = @owner
         updated_project = {
           project: {
             name: ''
@@ -202,13 +167,13 @@ describe ProjectsController do
       end
 
       it 'redirects to project path on successful update' do
-        session[:user_id] = @owner_user
+        session[:user_id] = @owner
         put :update, @updated_project
         expect(response).to redirect_to(project_path(Project.first))
       end
 
       it 'redirects to project path if user is an admin' do
-        session[:user_id] = @admin_user
+        session[:user_id] = @admin
         put :update, @updated_project
         expect(response).to redirect_to(project_path(Project.first))
       end
@@ -229,7 +194,7 @@ describe ProjectsController do
       end
 
       it "renders 404 if user is a member" do
-        session[:user_id] = @member_user.id
+        session[:user_id] = @member.id
         count = Project.count
         delete :destroy, id: @project.id
         expect(response.status).to eq(404)
@@ -239,7 +204,7 @@ describe ProjectsController do
 
     context "valid attempts to destroy" do
       it "redirects to projects path if user is an owner" do
-        session[:user_id] = @owner_user.id
+        session[:user_id] = @owner.id
         count = Project.count
         delete :destroy, id: @project.id
         expect(@projects.count).to eq(count -1)
@@ -247,7 +212,7 @@ describe ProjectsController do
       end
 
       it "redirects to projects path if user is an admin" do
-        session[:user_id] = @admin_user.id
+        session[:user_id] = @admin.id
         count = @projects.count
         delete :destroy, id: @project.id
         expect(@projects.count).to eq(count -1)
