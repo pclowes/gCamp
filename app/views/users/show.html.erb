@@ -24,5 +24,13 @@
           <%= mail_to @user.email %>
       </div>
     </div>
+    <div class="form-group">
+      <label class="col-sm-2 text-right">Pivotal Tracker Token</label>
+      <% if @user.tracker_token %>
+        <p class="col-md-2"><%= @user.tracker_token[1..4] + '*'*20%></p>
+      <% else %>
+        <p class="col-md-2">(no pivotal tracker token)</p>
+      <% end %>
+    </div>
   <% end %>
 </div>

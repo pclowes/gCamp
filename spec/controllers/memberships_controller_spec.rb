@@ -26,6 +26,7 @@ describe MembershipsController do
       title: 'Owner'
     )
   end
+  
 
   describe '#index' do
 
@@ -103,6 +104,7 @@ describe MembershipsController do
     end
 
   end
+
 
   describe '#update' do
 

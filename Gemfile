@@ -10,7 +10,8 @@ group :development do
   gem 'launchy'
 end
 
-
+#for API class
+gem 'faraday'
 #for debugging
 gem 'pry-rails'
 #for pagination

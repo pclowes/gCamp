@@ -4,6 +4,10 @@ class ProjectsController < ApplicationController
   before_action :authorize_owner, only: [:edit, :update, :destroy]
   def index
     @projects = current_user.projects
+    if current_user.tracker_token?
+      tracker_api = TrackerAPI.new
+      @tracker_projects = tracker_api.get_projects(current_user.tracker_token)
+    end
   end
 
   def show

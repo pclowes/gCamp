@@ -33,5 +33,10 @@
           </td>
         </tr>
     <% end %>
+    <% if current_user.tracker_token? %>
+      <% @tracker_projects.each do |project| %>
+        <%= project %>
+      <% end %>
+    <% end %>
   </tbody>
 </table>
