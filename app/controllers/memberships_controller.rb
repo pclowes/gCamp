@@ -16,20 +16,24 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.new(allowed_params)
     if @membership.save
-      redirect_to project_memberships_path
+      redirect_to project_memberships_path(@project), notice: 'Membership was successfully created.'
     else
       render :index
     end
   end
 
+
   def update
     membership = Membership.find(params[:id])
     if membership.update(allowed_params)
       redirect_to project_memberships_path, notice: "#{membership.user.full_name} was updated successfully."
-    else
+    elsif membership.check_update == false
       redirect_to project_memberships_path, notice:  "Can't change the last owner of a project to a member"
+    else
+      render :index
     end
   end
+
 
   def destroy
     if membership = Membership.find(params[:id]).destroy
@@ -50,7 +54,7 @@ class MembershipsController < ApplicationController
   end
 
   def authorize_member
-    raise AccessDenied unless current_user.member?(@project)
+    raise AccessDenied unless current_user.member?(@project) || current_user.admin?
   end
 
   def authorize_owner

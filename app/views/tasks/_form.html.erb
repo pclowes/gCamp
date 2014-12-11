@@ -1,7 +1,7 @@
 <%= form_for([@project, @task], html: {class: "form-horizontal"}) do |f| %>
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-5">
-      <%= render 'shared/errors', record: @task %>
+      <%= render 'shared/errors', record: @task, element: "task" %>
     </div>
   </div>
   <div class="form-group">
