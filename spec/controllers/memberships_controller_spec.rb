@@ -16,14 +16,14 @@ describe MembershipsController do
     }
     @projects = Project.all
     @membership = create_membership(
-    user: @member,
-    project: @project,
-    title: 'Member'
+      user: @member,
+      project: @project,
+      title: 'Member'
     )
     @ownership = create_membership(
-    user: @owner,
-    project: @project,
-    title: 'Owner'
+      user: @owner,
+      project: @project,
+      title: 'Owner'
     )
   end
 
@@ -78,30 +78,27 @@ describe MembershipsController do
     context 'valid create attempts' do
       it 'renders index if owner save fails' do
         session[:user_id] = @owner.id
-        post :create, project_id: @project.id, membership: {user: ''}
+        post :create, project_id: @project.id, :membership => {user: '', title: "Owner"}
         expect(response).to render_template('index')
-        expect(flash[:notice]).to eq("User can't be blank.")
       end
 
       it 'renders index if admin save fails' do
         session[:user_id] = @admin.id
-        post :create, project_id: @project.id, membership: {user: ''}
+        post :create, project_id: @project.id, membership: {user: '', title: "Owner"}
         expect(response).to render_template('index')
-        expect(flash[:notice]).to eq("User can't be blank.")
       end
 
       it 'redirects to memberships index if user is an owner' do
         session[:user_id] = @owner.id
-        post :create, project_id: @project.id, :membership => {user: @user, title: "Owner"}
-        expect(response).to render_template('index')
-        expect(flash[:notice]).to eq("Membership was created successfully.")
+        post :create, project_id: @project.id, :membership => {project_id: @project.id, user_id: @user, title: "Owner"}
+        expect(response).to redirect_to(project_memberships_path(@project))
+
       end
 
       it 'redirects to memberships index if user is an admin' do
         session[:user_id] = @admin.id
-        post :create, project_id: @project.id, :membership => {user: @user, title: "Owner"}
-        expect(response).to render_template('index')
-        expect(flash[:notice]).to eq("Membership was created successfully.")
+        post :create, project_id: @project.id, :membership => {project_id: @project.id, user_id: @user, title: "Owner"}
+        expect(response).to redirect_to(project_memberships_path(@project))
       end
     end
 
