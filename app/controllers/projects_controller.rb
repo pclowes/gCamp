@@ -11,8 +11,9 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def tracker
-    @tracker_projects = TrackerAPI.new.get_projects(current_user.tracker_token)
+  def tracker_stories
+    @stories = TrackerAPI.new.get_stories(params[:tracker_id], current_user.tracker_token)
+    @stories = Kaminari.paginate_array(@stories).page(params[:page])
   end
 
   def show

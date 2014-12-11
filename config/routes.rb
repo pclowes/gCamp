@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get '/sign-in' => 'authentication#new', as: :signin
   post '/sign-in' => 'authentication#create'
   get '/sign-out' => 'authentication#destroy', as: :signout
-  get 'tracker_project/:tracker_id' => 'projects#tracker', as: :tracker_project
+  get 'tracker_project/:tracker_id' => 'projects#tracker_stories', as: :tracker_project
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -13,12 +13,19 @@
       </tr>
     </thead>
     <tbody>
+      <% @stories.each do |story| %>
       <tr>
-        <td class="col-sm-5">Story</td>
-        <td class="col-sm-2">Estimate</td>
-        <td class="col-sm-2">Labels</th>
-        <td class="col-sm-3">Current State</td>
+        <td><%= link_to story[:name], "https://www.pivotaltracker.com/n/projects/1183326" %></td>
+        <td><%= story[:estimate] %></td>
+        <td>
+          <% if story[:labels][0] %>
+            <%= story[:labels][0][:name] %>
+          <% end %>
+        </td>
+        <td><%= story[:current_state] %></td>
       </tr>
+      <% end %>
     </tbody>
   </table>
+  <%= paginate @stories %>
 </div>
