@@ -33,10 +33,28 @@
           </td>
         </tr>
     <% end %>
-    <% if current_user.tracker_token? %>
-      <% @tracker_projects.each do |project| %>
-        <%= project %>
-      <% end %>
+  </tbody>
+</table>
+<% if current_user.tracker_token? %>
+<div class="page-header">
+  <span class="h1">Pivotal Tracker Projects</span>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="col-sm-1">
+        Name
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tracker_projects.each do |project| %>
+    <tr>
+      <td class="col-sm-1">
+        <%= project[:name] %>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
+<% end %>
