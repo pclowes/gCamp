@@ -14,7 +14,8 @@ class TrackerAPI
     JSON.parse(response.body, symbolize_names: true)
   end
 
-end
+  def get_stories(project_id, tracker_token)
 
-# tracker_api = TrackerAPI.new
-# tracker_api.get_projects(token)
+  end
+
+end
