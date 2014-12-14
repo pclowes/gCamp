@@ -17,6 +17,7 @@
           <a class="navbar-brand" href="<%= projects_path %>">gCamp</a>
           <% if current_user.admin? %>
             <ul class="nav navbar-nav">
+              <li><a href="<%= users_path %>">Users</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   All Projects
@@ -33,6 +34,7 @@
             </ul>
           <% elsif current_user %>
           <ul class="nav navbar-nav">
+            <li><a href="<%= users_path %>">Users</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 My Projects
@@ -78,7 +80,6 @@
             <%= link_to t(:about), about_path, {:class => ("active disabled" if current_page?('/about'))}%> |
             <%= link_to t(:terms), terms_path, {:class => ("active disabled" if current_page?('/terms'))}%> |
             <%= link_to t(:faq), faq_path, {:class => ("active disabled" if current_page?('/faq'))}%> |
-            <%= link_to t(:users), users_path, {:class => ("active disabled" if current_page?('/users'))}%>
           </div>
         </div>
       </div>
