@@ -18,11 +18,7 @@
         <td><%= link_to story[:name], "https://www.pivotaltracker.com/n/projects/#{:project_id}" %></td>
         <td><%= story[:estimate] %></td>
         <td>
-          <% @labels = [] %>
-          <% story[:labels].each do |label| %>
-            <% @labels << label[:name] %>
-          <% end %>
-          <%= @labels.join(', ') %>
+          <%= label_join(story) %>
         </td>
         <td><%= story[:current_state] %></td>
       </tr>

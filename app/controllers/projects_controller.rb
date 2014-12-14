@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  include ProjectsHelper
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :authorize_member, only: [:show]
   before_action :authorize_owner, only: [:edit, :update, :destroy]
