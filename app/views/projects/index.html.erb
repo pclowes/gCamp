@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= render partial: "projects", collection: @projects %>
+    <%= render partial: "project", collection: @projects %>
   </tbody>
 </table>
 <% if current_user.tracker_token? %>
@@ -36,7 +36,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= render partial: "tracker_projects", collection: @tracker_projects %>
+    <%= render partial: "tracker_project", collection: @tracker_projects %>
   </tbody>
 </table>
 <% end %>
