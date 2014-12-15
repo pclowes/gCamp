@@ -21,17 +21,17 @@
   </thead>
   <tbody>
     <% current_user.projects.each do |project| %>
-        <tr>
-          <td class="col-sm-1">
-            <%= link_to project.name, project %>
-          </td>
-          <td class="col-sm-1">
-            <%= link_to project.tasks.count, project_tasks_path(project) %>
-          </td>
-          <td class="col-sm-1">
-            <%= link_to project.memberships.count, project_memberships_path(project) %>
-          </td>
-        </tr>
+      <tr>
+        <td class="col-sm-1">
+          <%= link_to project.name, project %>
+        </td>
+        <td class="col-sm-1">
+          <%= link_to project.tasks.count, project_tasks_path(project) %>
+        </td>
+        <td class="col-sm-1">
+          <%= link_to project.memberships.count, project_memberships_path(project) %>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
@@ -48,13 +48,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @tracker_projects.each do |project| %>
-    <tr>
-      <td class="col-sm-1">
-        <%= link_to project[:name], tracker_project_path(project[:id]) %>
-      </td>
-    </tr>
-    <% end %>
+    <%= render partial: "tracker_projects", collection: @tracker_projects %>
   </tbody>
 </table>
 <% end %>
