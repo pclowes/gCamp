@@ -14,13 +14,13 @@ class Membership < ActiveRecord::Base
   end
 
   def check_owners
-    false if owner.count == 1 && title == "Owner"
+    true unless owner.count == 1 && title == "Owner"
       # title is what the user is being set TO not what it is being set FROM
   end
 
 
   def check_update
-    false if owner.count <= 1 && title == "Member"
+    true unless owner.count <= 1 && title == "Member"
   end
 
 end
