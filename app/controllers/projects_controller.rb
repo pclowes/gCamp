@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
       tracker_api = TrackerAPI.new
       @tracker_projects = tracker_api.get_projects(current_user.tracker_token)
     end
+    
   end
 
   def tracker_stories

@@ -1,11 +1,11 @@
 <tr>
   <td class="col-sm-1">
-    <%= link_to project.name, project %>
+    <%= link_to projects.name, projects %>
   </td>
   <td class="col-sm-1">
-    <%= link_to project.tasks.count, project_tasks_path(project) %>
+    <%= link_to projects.tasks.count, project_tasks_path(projects) %>
   </td>
   <td class="col-sm-1">
-    <%= link_to project.memberships.count, project_memberships_path(project) %>
+    <%= link_to projects.memberships.count, project_memberships_path(projects) %>
   </td>
 </tr>
