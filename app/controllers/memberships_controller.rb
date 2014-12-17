@@ -2,7 +2,6 @@ class MembershipsController < ApplicationController
   before_action do
     @project = Project.find(params[:project_id])
   end
-  before_action :require_login
   before_action :authorize_member, only: [:index]
   before_action :authorize_owner, only: [:new, :create, :edit, :update]
   before_action :authorize_destroy, only: [:destroy]

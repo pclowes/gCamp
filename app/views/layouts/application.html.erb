@@ -2,7 +2,7 @@
   <head>
     <%= stylesheet_link_tag 'application' %>
     <%= csrf_meta_tags %>
-    <title>gCamp</title>
+    <title><%= content_for(:title) || "gCamp" %></title>
   </head>
   <body class="<%='homepage' if current_page?'/'%>">
     <div class="navbar-fixed-top navbar-inverse" role="navigation">

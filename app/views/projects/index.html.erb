@@ -1,10 +1,10 @@
 <% if notice %>
   <p align="center" class="alert alert-success" id="notice"><%= notice %></p>
 <% end %>
-<div class="page-header">
-  <span class="h1">Projects</span>
-  <%= link_to 'Create Project', new_project_path, class: "btn btn-info pull-right" %>
-</div>
+
+<%= page_header "Projects" do %>
+  <%= link_to 'Create Project', new_project_path, class: "btn btn-info" %>
+<% end %>
 <table class="table">
   <thead>
     <tr>
@@ -24,19 +24,17 @@
   </tbody>
 </table>
 <% if current_user.tracker_token? %>
-<div class="page-header">
-  <span class="h1">Pivotal Tracker Projects</span>
-</div>
-<table class="table">
-  <thead>
-    <tr>
-      <th class="col-sm-1">
-        Name
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render partial: "tracker_project", collection: @tracker_projects %>
-  </tbody>
-</table>
+  <%= page_header "Pivotal Tracker Projects" %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-sm-1">
+          Name
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "tracker_project", collection: @tracker_projects %>
+    </tbody>
+  </table>
 <% end %>
