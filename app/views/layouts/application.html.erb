@@ -17,7 +17,6 @@
           <a class="navbar-brand" href="<%= projects_path %>">gCamp</a>
           <% if current_user.admin? %>
             <ul class="nav navbar-nav">
-              <li><a href="<%= users_path %>">Users</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   All Projects
@@ -31,10 +30,10 @@
                   <li><a href="#"><%= link_to "New Project", new_project_path %></a></li>
                 </ul>
               </li>
+              <li><a href="<%= users_path %>">Users</a></li>
             </ul>
           <% elsif current_user %>
           <ul class="nav navbar-nav">
-            <li><a href="<%= users_path %>">Users</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 My Projects
@@ -48,6 +47,7 @@
                 <li><a href="#"><%= link_to "New Project", new_project_path %></a></li>
               </ul>
             </li>
+            <li><a href="<%= users_path %>">Users</a></li>
           </ul>
           <% end %>
         </div>
