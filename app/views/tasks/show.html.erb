@@ -1,9 +1,6 @@
-<div class="page-header">
-  <span class="h1"><%= @task.description %></span>
-  <div class= "btn-toolbar pull-right">
-    <%= link_to 'Edit', edit_project_task_path(@project, @task), class: "btn btn-primary" %>
-  </div>
-</div>
+<%= page_header @task.description do %>
+  <%= link_to 'Edit', edit_project_task_path(@project, @task), class: "btn btn-primary" %>
+<% end %>
 
 <ol class="breadcrumb">
   <li><%= link_to "Projects", projects_path %></li>
@@ -11,9 +8,6 @@
   <li><%= link_to "Tasks", project_tasks_path %></li>
   <li><%= @task.description %></li>
 </ol>
-<% if notice %>
-  <p align="center" class="alert alert-success" id="notice"><%= notice %></p>
-<% end %>
 
 <p>
   <strong>Due Date:</strong>
@@ -40,13 +34,12 @@
         </p>
         <p class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</p>
       </td>
-      <td class="col-sm-offset-3 col-sm-9">
-        <%= comment.comment %>
-      </td>
+      <td class="col-sm-offset-3 col-sm-9"><%= comment.comment %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
 <% if session[:user_id] %>
   <%= form_for(@comment, html: {class: "form-horizontal"}) do |f| %>
     <%= hidden_field_tag :user_id, @comment.user_id%>

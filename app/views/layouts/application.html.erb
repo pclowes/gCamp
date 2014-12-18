@@ -71,6 +71,9 @@
       </div>
     </div>
     <div class="container special">
+    <% if notice %>
+      <p align="center" class="alert alert-success" id="notice"><%= notice %></p>
+    <% end %>
       <%= yield %>
     </div>
       <div class="footer">

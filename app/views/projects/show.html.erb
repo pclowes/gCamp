@@ -1,14 +1,9 @@
-<% if notice %>
-  <p align="center" class="alert alert-success" id="notice"><%= notice %></p>
-<% end %>
-<div class="page-header">
-  <span class="h1"><%= @project.name %></span>
-  <% if current_user.owner?(@project) %>
-    <div class="btn-toolbar pull-right">
-      <%= link_to 'Edit', edit_project_path, class: "btn btn-info" %>
-    </div>
+<%= page_header @project.name do %>
+  <% if current_user.owner?(@project) || current_user.admin? %>
+    <%= link_to 'Edit', edit_project_path, class: "btn btn-info" %>
   <% end %>
-</div>
+<% end %>
+
 <ol class="breadcrumb">
   <li><%= link_to "Projects", projects_path %></li>
   <li class="active"><%= @project.name %></li>

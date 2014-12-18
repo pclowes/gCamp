@@ -5,7 +5,7 @@ module ApplicationHelper
     end
     html = '<div class="page-header">'.html_safe
     if block
-      html += '<div class="pull-right">'.html_safe
+      html += '<div class="btn-toolbar pull-right">'.html_safe
       html += capture do
         block.call
       end
