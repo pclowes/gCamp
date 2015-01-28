@@ -11,6 +11,8 @@ gCamp is a project and team management app built entirely on the Ruby on Rails f
 * Authentication
 * Associations
 * Authorization
+* API Integrations
+* Testing using Capybara and RSpec
 
 
 -

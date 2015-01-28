@@ -1,9 +1,9 @@
 class PagesController < MarketingController
   def homepage
-    @images = ['mountain1.jpg','mountain2.jpg','mountain3.jpg']
-    @columns = {Tasks:['Grouped by projects and lists, just the way you like\'em'],
-                Documents:['Upload','Comment','Revise'],
-                Comments:['Comment on task and documents','Get email notifications']
+    @images = ['Projects.png','Tasks.png','Comments.png']
+    @columns = {Projects:['Upload, Comment, Revise','Pivotal Tracker Integration'],
+                Tasks:['Grouped by projects just the way you like\'em'],
+                Comments:['Comment on task and projects']
                 }
 
 
