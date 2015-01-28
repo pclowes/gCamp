@@ -26,7 +26,7 @@ describe MembershipsController do
       title: 'Owner'
     )
   end
-  
+
 
   describe '#index' do
 

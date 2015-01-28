@@ -18,7 +18,6 @@ class Membership < ActiveRecord::Base
       # title is what the user is being set TO not what it is being set FROM
   end
 
-
   def check_update
     true unless owner.count <= 1 && title == "Member"
   end

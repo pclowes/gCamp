@@ -55,6 +55,10 @@ describe ProjectsController do
       expect(response).to render_template('new')
     end
 
+    # test can fail later due to a change that is not related to controllers.
+    # Ex. removing the validations for project name
+    # should be a model test
+
   end
 
 
@@ -70,6 +74,7 @@ describe ProjectsController do
 
 
   describe "#edit" do
+    # better (may abstract security somewhere else) but also does test security.
 
     context "invalid attempts to edit" do
       it "renders 404 if user is not a member" do
@@ -133,6 +138,8 @@ describe ProjectsController do
         expect(response).to render_template('show')
       end
     end
+
+    # while we could dry up these tests it makes it less readable
 
   end
 
